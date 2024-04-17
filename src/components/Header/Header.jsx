@@ -12,7 +12,7 @@ function Header() {
             odio molestias. Quaerat, repellendus? Voluptate delectus architecto
             vero nostrum laborum? Ducimus, magnam.
           </p>
-          <button>View Menu</button>
+          <a href="#explore-menu"><button>View Menu &nbsp; &rarr;</button></a>
         </div>
       </div>
     </>
