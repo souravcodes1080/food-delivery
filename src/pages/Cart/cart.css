@@ -6,7 +6,7 @@
     grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 0.5fr;
     align-items: center;
     color: grey;
-    font-size: max(0.8vw, 12px);
+    font-size: max(0.8vw, 16px);
 }
 .cart-items-item{
     margin: 10px 0px;
