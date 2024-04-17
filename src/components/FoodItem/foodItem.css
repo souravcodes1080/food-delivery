@@ -72,3 +72,13 @@
     width: 30px;
     cursor: pointer;
 }
+@media (max-width:500px) {
+    .food-item-name-rating {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: start;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+}
