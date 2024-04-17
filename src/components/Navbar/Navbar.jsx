@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import "./navbar.css";
 import { assets } from "../../assets/assets";
 import { Link } from "react-router-dom";
-function Navbar({setShowLogin}) {
+function Navbar({ setShowLogin }) {
   const [menu, setMenu] = useState("home");
   return (
     <>
       <div className="navbar">
-        <img src={assets.logo} className="logo" alt="logo" />
+        <Link to={"/"}>
+          <img  onClick={() => setMenu("home")} src={assets.logo} className="logo" alt="logo" />
+        </Link>
         <ul className="navbar-menu">
           <Link
             to="/"
@@ -41,10 +43,12 @@ function Navbar({setShowLogin}) {
         <div className="navbar-right">
           <img src={assets.search_icon} alt="" />
           <div className="navbar-search-icon">
-            <img src={assets.bag_icon} alt="" />
+            <Link to={"/cart"}>
+              <img  onClick={() => setMenu("cart")} src={assets.bag_icon} alt="" />
+            </Link>
             <div className="dot"></div>
           </div>
-          <button onClick={()=>setShowLogin(true)}>Sign In</button>
+          <button onClick={() => setShowLogin(true)}>Sign In</button>
         </div>
       </div>
     </>
