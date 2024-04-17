@@ -3,6 +3,8 @@ import "./loginPopup.css";
 import { assets } from "../../assets/assets";
 function LoginPopup({ setShowLogin }) {
   const [currState, setCurrState] = useState("Sign Up");
+  const [showPassword, setShowPassword] = useState(true);
+  
   return (
     <>
       <div className="login">
@@ -23,7 +25,18 @@ function LoginPopup({ setShowLogin }) {
             )}
 
             <input type="email" placeholder="Your email" required />
-            <input type="password" placeholder={currState==="Sign Up"? 'Set your password': 'Your password'} required />
+            <div className="password">
+              <input
+                type={showPassword ? 'password' : 'text'}
+                placeholder={
+                  currState === "Sign Up"
+                    ? "Set your password"
+                    : "Your password"
+                }
+                required
+              />
+              <p onClick={()=>setShowPassword(!showPassword)}>{showPassword? 'show' : 'hide'}</p>
+            </div>
           </div>
           <button>
             {currState === "Sign Up" ? "Create account" : "Login"}
@@ -34,11 +47,13 @@ function LoginPopup({ setShowLogin }) {
           </div>
           {currState === "Sign Up" ? (
             <p>
-              Already have an account?<span onClick={()=>setCurrState('Login')} >Login</span>
+              Already have an account?
+              <span onClick={() => setCurrState("Login")}>Login</span>
             </p>
           ) : (
             <p>
-              Create a new account? <span onClick={()=>setCurrState('Sign Up')} >Sign up</span>
+              Create a new account?{" "}
+              <span onClick={() => setCurrState("Sign Up")}>Sign up</span>
             </p>
           )}
         </form>

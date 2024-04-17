@@ -37,16 +37,19 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    
+
 }
-.login-inputs input{
+
+.login-inputs input {
+    width: 100%;
     padding: 10px;
     outline: none;
     border: 1px solid #c9c9c9;
     border-radius: 4px;
     font-size: 15px;
 }
-.login-container button{
+
+.login-container button {
     border: none;
     padding: 10px;
     background-color: tomato;
@@ -56,22 +59,32 @@
     border-radius: 4px;
 }
 
-.login-condition{
+.login-condition {
     display: flex;
     align-items: center;
     gap: 8px;
     margin-top: 8px;
 }
 
-.login-condition input{
-    /* margin-top: 5px; */
+.password {
+    position: relative;
 }
 
-.login p{
-    
+.login-inputs p {
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+    right: 10px;
+    bottom: 50%;
+    transform: translateY(50%);
+}
+
+.login p {
+
     font-size: 15px;
 }
-.login p span{
+
+.login p span {
     margin-left: 8px;
     color: tomato;
     font-weight: 500;
