@@ -2,6 +2,13 @@ import mongoose from "mongoose";
 
 const foodSchema = new mongoose.Schema(
   {
+    available:{
+      type: Boolean,
+      default: true
+    },
+    veg:{
+      type:Boolean
+    },
     name: {
       type: String,
       required: true,
@@ -21,7 +28,8 @@ const foodSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-    },
+    }
+    
   },
   { timestamps: true }
 );
