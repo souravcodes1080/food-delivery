@@ -69,3 +69,10 @@
     color: white;
     cursor: pointer;
 }
+
+@media (max-width:600px) {
+    .add-category-price{
+        flex-direction: column;
+    }
+    
+}

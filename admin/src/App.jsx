@@ -16,12 +16,15 @@ function App() {
       <hr />
       <div className="app-content">
         <Sidebar />
-        <Routes>
+        <div className="inner-body">
+            <Routes >
           <Route path="/add" element={<Add />} />
           <Route path="/list" element={<List />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/update/:id" element={<Update />} />
         </Routes>
+        </div>
+      
       </div>
     </>
   );

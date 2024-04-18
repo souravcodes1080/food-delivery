@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./add.css";
 import { assets } from "../../assets/assets";
-import { URI } from "../../config";
+import { DOMAIN } from "../../config";
 import axios from "axios";
 import { toast } from "react-toastify";
 function Add() {
@@ -38,7 +38,7 @@ function Add() {
     formData.append("available", Boolean(data.available));
     formData.append("veg", Boolean(data.veg));
     formData.append("image", image);
-    const response = await axios.post(`${URI}/api/food/add`, formData);
+    const response = await axios.post(`${DOMAIN}/api/food/add`, formData);
 
     if (response.data.success) {
       setData({

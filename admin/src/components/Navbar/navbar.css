@@ -1,8 +1,14 @@
 .navbar{
+    z-index: 100;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 8px 4%;
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    background-color: #fcfcfc;
+    border-bottom: 1px solid #cacaca;
 }
 .navbar .logo{
     width: max(10%, 80px);
