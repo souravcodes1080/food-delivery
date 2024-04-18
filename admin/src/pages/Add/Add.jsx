@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./add.css";
 import { assets } from "../../assets/assets";
+import { URI } from "../../config";
+import axios from "axios";
+import { toast } from "react-toastify";
 function Add() {
+  const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(false);
   const [isAvailable, setIsAvailable] = useState(true);
   const [data, setData] = useState({
@@ -12,22 +16,55 @@ function Add() {
     available: isAvailable,
     veg: "",
   });
+  const handleVegChange = (e) => {
+    const isVeg = e.target.value === "true";
+    setData((prevData) => ({ ...prevData, veg: isVeg }));
+  };
   const onChangeHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setData((data) => ({ ...data, [name]: value }));
   };
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("price", Number(data.price));
+    formData.append("category", data.category);
+    formData.append("available", Boolean(data.available));
+    formData.append("veg", Boolean(data.veg));
+    formData.append("image", image);
+    const response = await axios.post(`${URI}/api/food/add`, formData);
+
+    if (response.data.success) {
+      setData({
+        name: "",
+        description: "",
+        price: "",
+        category: "",
+        available: isAvailable,
+        veg: "",
+      });
+      setImage(false);
+
+      setLoading(false);
+      toast.success(response.data.message);
+    } else {
+      toast.error(response.data.message);
+      setLoading(false);
+    }
+  };
 
   return (
     <>
       <div className="add">
-        <form className="flex-col">
+        <form className="flex-col" onSubmit={onSubmitHandler}>
           <div className="add-image-upload flex-col">
-            <p>Upload Image</p>
+            <p>Upload Image *</p>
             <label htmlFor="image">
               <img
                 src={image ? URL.createObjectURL(image) : assets.upload_area}
@@ -43,7 +80,7 @@ function Add() {
             />
           </div>
           <div className="add-product-name flex-col">
-            <p>Product Name</p>
+            <p>Product Name *</p>
             <input
               onChange={onChangeHandler}
               value={data.name}
@@ -54,7 +91,7 @@ function Add() {
             />
           </div>
           <div className="add-product-desc flex-col">
-            <p>Product Description</p>
+            <p>Product Description *</p>
             <textarea
               onChange={onChangeHandler}
               value={data.description}
@@ -66,7 +103,7 @@ function Add() {
           </div>
           <div className="add-category-price ">
             <div className="add-category flex-col">
-              <p>Product Category</p>
+              <p>Product Category *</p>
               <select
                 name="category"
                 onChange={onChangeHandler}
@@ -83,7 +120,7 @@ function Add() {
               </select>
             </div>
             <div className="add-price flex-col">
-              <p>Product Price</p>
+              <p>Product Price *</p>
               <input
                 onChange={onChangeHandler}
                 value={data.price}
@@ -94,7 +131,7 @@ function Add() {
             </div>
           </div>
           <div className="add-availibilty">
-            <p>Product Available</p>
+            <p>Product Available *</p>
             <input
               onChange={(e) => {
                 setIsAvailable(e.target.checked);
@@ -107,14 +144,15 @@ function Add() {
               type="checkbox"
             />
           </div>
-          <div className="add-veg ">
+          <div className="add-veg">
             <div className="veg-option">
               <input
                 type="radio"
                 id="veg"
                 name="veg"
-                onChange={onChangeHandler}
                 value="true"
+                checked={data.veg === true}
+                onChange={handleVegChange}
               />
               <label htmlFor="veg">Veg</label>
             </div>
@@ -123,14 +161,15 @@ function Add() {
                 type="radio"
                 id="nonveg"
                 name="veg"
-                onChange={onChangeHandler}
                 value="false"
+                checked={data.veg === false}
+                onChange={handleVegChange}
               />
               <label htmlFor="nonveg">Non veg</label>
             </div>
           </div>
           <button type="submit" className="add-btn">
-            Add
+            {loading ? "Adding Food..." : "Add"}
           </button>
         </form>
       </div>
