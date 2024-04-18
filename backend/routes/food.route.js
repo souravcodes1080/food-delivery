@@ -1,9 +1,9 @@
 import express from "express";
 import {
   addFood,
+  getFoodById,
   getFoods,
   removeFood,
-  updateFoodPrice,
   updateFoodStatus,
 } from "../controllers/food.controller.js";
 import multer from "multer";
@@ -22,9 +22,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 foodRouter.post("/add", upload.single("image"), addFood);
+foodRouter.get('/getFoodById/:id', getFoodById)
 foodRouter.get("/list", getFoods);
 foodRouter.patch("/update/available/:id", updateFoodStatus);
-foodRouter.patch("/update/price/:id", updateFoodPrice);
+
 foodRouter.post("/remove", removeFood);
 
 export default foodRouter;

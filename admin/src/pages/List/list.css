@@ -28,6 +28,17 @@
 .opacity {
     opacity: 0.5;
 }
+.cursor-pointer{
+    cursor: pointer;
+}
+.cursor-pointer:hover{
+    transform: scale(1.1);
+    transition: .1s ease-in-out;
+
+}
+.edit-icon{
+    width: 25px;
+}
 @media (max-width:600px) {
     .list-table-format{
         grid-template-columns:  1fr 3fr 1fr 0.4fr ;
@@ -42,5 +53,8 @@
     }
     .hide{
         display: none;
+    }
+    .edit-icon{
+        width: 15px;
     }
 }

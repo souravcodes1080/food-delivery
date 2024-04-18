@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./list.css";
 import { DOMAIN } from "../../config";
 import { toast } from "react-toastify";
+import {Link} from 'react-router-dom'
 import axios from "axios";
 import { assets } from "../../assets/assets";
 function List() {
@@ -37,15 +38,35 @@ function List() {
             return (
               <div className="list-table-format" key={index}>
                 <img
-                  className={item.available? "vegnonveg hide" : "vegnonveg opacity hide"}
+                  className={
+                    item.available ? "vegnonveg hide" : "vegnonveg opacity hide"
+                  }
                   src={item.veg ? assets.veg_icon : assets.nonveg_icon}
                   alt=""
                 />
-                <img className={item.available? "food-image" : "food-image opacity"} src={`${DOMAIN}/images/` + item.image} alt={item.name} />
-                <p className={item.available? "" : "opacity"}>{item.name}</p>
-                <p className={item.available? "hide" : "hide opacity"}>{item.category}</p>
-                <p className={item.available? "" : "opacity"}>${item.price}</p>
-                <p className={item.available? "" : "opacity"}>&rarr;</p>
+                <img
+                  className={
+                    item.available ? "food-image" : "food-image opacity"
+                  }
+                  src={`${DOMAIN}/images/` + item.image}
+                  alt={item.name}
+                />
+                <p className={item.available ? "" : "opacity"}>{item.name}</p>
+                <p className={item.available ? "hide" : "hide opacity"}>
+                  {item.category}
+                </p>
+                <p className={item.available ? "" : "opacity"}>${item.price}</p>
+                <Link to={`/update/${item._id}`}>
+                  <p
+                    className={
+                      item.available
+                        ? "cursor-pointer"
+                        : " cursor-pointer opacity"
+                    }
+                  >
+                    <img src={assets.edit_icon} className="edit-icon" />
+                  </p>
+                </Link>
               </div>
             );
           })}

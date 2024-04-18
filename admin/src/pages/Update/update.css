@@ -1,0 +1,10 @@
+.update-remove{
+    display: flex;
+    gap: 20px;
+}
+.update-remove button:nth-child(1){
+    background-color: blue;
+}
+.update-remove button:nth-child(2){
+    background-color: red;
+}
