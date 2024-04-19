@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { connectDb } from "./config/db.js";
 import foodRouter from "./routes/food.route.js";
+import userRouter from "./routes/user.route.js";
 dotenv.config();
 // app config
 const app = express();
@@ -13,11 +14,13 @@ app.use(cors());
 connectDb();
 
 //api endpoints
+//food api
 app.use("/api/food", foodRouter);
-app.use("/images", express.static('uploads'))
-app.get("/", (req, res) => {
-  res.send("Hello");
-});
+app.use("/images", express.static("uploads"));
+
+
+//user api
+app.use("/api/user", userRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running in:-> " + process.env.DOMAIN);
