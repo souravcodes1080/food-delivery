@@ -22,7 +22,6 @@ const loginUser = async (req, res) => {
     const token = createToken(user._id);
     return res.json({
         success: true,
-        user: {email},
         token,
         message: "User logged in.",
       });
