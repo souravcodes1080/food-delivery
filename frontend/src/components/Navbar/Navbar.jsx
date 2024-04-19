@@ -1,16 +1,27 @@
 import React, { useContext, useState } from "react";
 import "./navbar.css";
 import { assets } from "../../assets/assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 function Navbar({ setShowLogin }) {
   const [menu, setMenu] = useState("home");
-  const {getTotalCartAmount} = useContext(StoreContext)
+  const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
+  const navigate = useNavigate()
+  const logout = () =>{
+    localStorage.removeItem("Token")
+    setToken("")
+    navigate('/')
+  }
   return (
     <>
       <div className="navbar">
         <Link to={"/"}>
-          <img onClick={()=>setMenu('home')} src={assets.logo} className="logo" alt="logo" />
+          <img
+            onClick={() => setMenu("home")}
+            src={assets.logo}
+            className="logo"
+            alt="logo"
+          />
         </Link>
         <ul className="navbar-menu">
           <Link
@@ -46,11 +57,26 @@ function Navbar({ setShowLogin }) {
           <img src={assets.search_icon} alt="" />
           <div className="navbar-search-icon">
             <Link to={"/cart"}>
-              <img  onClick={() => setMenu("cart")} src={assets.bag_icon} alt="" />
+              <img
+                onClick={() => setMenu("cart")}
+                src={assets.bag_icon}
+                alt=""
+              />
             </Link>
-            <div className={getTotalCartAmount() > 0 ?'dot': ''}></div>
+            <div className={getTotalCartAmount() > 0 ? "dot" : ""}></div>
           </div>
-          <button onClick={() => setShowLogin(true)}>Sign In</button>
+          {token ? (
+            <div className="navbar-profile">
+              <img src={assets.profile_icon} alt="profile" />
+              <ul className='nav-profile-dropdown'>
+                <li><img src={assets.bag_icon} alt="bag" /> <p>Orders</p></li>
+                <hr />
+                <li onClick={logout}><img src={assets.logout_icon} alt="logout" /><p>Logout</p></li>
+              </ul>
+            </div>
+          ) : (
+            <button onClick={() => setShowLogin(true)}>Sign In</button>
+          )}
         </div>
       </div>
     </>
