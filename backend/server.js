@@ -5,6 +5,7 @@ import { connectDb } from "./config/db.js";
 import foodRouter from "./routes/food.route.js";
 import userRouter from "./routes/user.route.js";
 import cartRouter from "./routes/cart.route.js";
+import orderRouter from "./routes/order.route.js";
 dotenv.config();
 // app config
 const app = express();
@@ -24,6 +25,9 @@ app.use("/api/user", userRouter);
 
 //cart api
 app.use("/api/cart", cartRouter);
+
+//order api
+app.use("/api/order", orderRouter)
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running in:-> " + process.env.DOMAIN);
