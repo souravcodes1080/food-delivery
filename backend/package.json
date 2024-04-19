@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev" : "nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "author": "sourav",
   "license": "ISC",
@@ -21,6 +21,7 @@
     "nodemon": "^3.1.0",
     "stripe": "^15.2.0",
     "toastify": "^2.0.1",
+    "twilio": "^5.0.4",
     "validator": "^13.11.0"
   }
 }
