@@ -62,6 +62,7 @@ import parcel_icon from './parcel_icon.png'
 import empty_cart from './empty_cart.png'
 import upi from './upi.png'
 import card from './card.png'
+import my_order from './my_order.png'
 export const assets = {
     logo,
     basket_icon,
@@ -84,7 +85,8 @@ export const assets = {
     parcel_icon,
     empty_cart,
     upi,
-    card
+    card,
+    my_order
 }
 
 export const menu_list = [

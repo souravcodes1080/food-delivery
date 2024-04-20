@@ -78,4 +78,14 @@ const verifyOrder = async (req, res) => {
   }
 };
 
-export { placeOrder, verifyOrder };
+//order list after confirmation
+const userOrder = async (req, res) =>{
+  try{
+    const orders = await orderModel.find({userId: req.body.userId})
+    res.json({success: true, data: orders})
+  }catch(error){
+    console.log(error);
+    res.json({ success: false, message: "Order Fetching failed." });
+  }
+}
+export { placeOrder, verifyOrder, userOrder };

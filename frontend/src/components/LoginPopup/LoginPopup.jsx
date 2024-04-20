@@ -32,12 +32,12 @@ function LoginPopup({ setShowLogin }) {
         password: userData.password,
       });
       if (response.data.success) {
-        toast.success(response.data.message);
+        // toast.success(response.data.message);
         setToken(response.data.token)
         localStorage.setItem("Token", response.data.token)
         setCurrState("Login");
       } else {
-        toast.error(response.data.message);
+        // toast.error(response.data.message);
       }
     } else if (currState === "Login") {
       const response = await axios.post(`${DOMAIN}/api/user/login`, {
@@ -45,13 +45,13 @@ function LoginPopup({ setShowLogin }) {
         password: userData.password,
       });
       if (response.data.success) {
-        toast.success(response.data.message);
+        // toast.success(response.data.message);
         setEmail(response.data.email)
         localStorage.setItem("Email", response.data.email)
         localStorage.setItem("Token", response.data.token)
         setShowLogin(false);
       } else {
-        toast.error(response.data.message);
+        // toast.error(response.data.message);
       }
     }
   };

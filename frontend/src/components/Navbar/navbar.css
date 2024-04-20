@@ -69,7 +69,7 @@
 .nav-profile-dropdown{
     position: absolute;
     display: none;
-    right: -50px;
+    right: 0px;
     z-index: 111;
 }
 .navbar-profile:hover .nav-profile-dropdown{

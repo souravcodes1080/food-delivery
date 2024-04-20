@@ -66,7 +66,12 @@ function PlaceOrder() {
     }
   };
 
-  
+  useEffect(()=>{
+    if(!localStorage.getItem("Token")){
+      toast.warn("Please login to continue.")
+      navigate('/cart')
+    }
+  }, [token, navigate])
   return (
     <>
       {getTotalCartAmount() > 0 ? (

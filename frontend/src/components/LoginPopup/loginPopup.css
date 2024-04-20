@@ -65,7 +65,10 @@
     gap: 8px;
     margin-top: 8px;
 }
-
+.login-condition input{
+    transform: scale(1.1);
+    cursor: pointer;
+}
 .password {
     position: relative;
 }
