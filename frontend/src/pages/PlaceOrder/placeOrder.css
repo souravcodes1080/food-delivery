@@ -39,7 +39,18 @@
 .place-order .cart-total button {
     margin-top: 30px;
 }
+.upi-btn{
+    margin: 0 !important;
+    background-color: transparent !important;
+}
+.upi-btn img{
 
+    width: 70px;
+}
+.upi-btn img:hover{
+    transform: scale(1.1);
+    transition: .3s;
+}
 @media (max-width:900px) {
     .place-order {
         flex-direction: column;

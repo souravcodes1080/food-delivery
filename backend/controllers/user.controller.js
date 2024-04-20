@@ -23,6 +23,7 @@ const loginUser = async (req, res) => {
     return res.json({
         success: true,
         token,
+        email: user.email,
         message: "User logged in.",
       });
   } catch (error) {

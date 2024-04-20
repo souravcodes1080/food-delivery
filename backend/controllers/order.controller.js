@@ -37,12 +37,15 @@ const placeOrder = async (req, res) => {
       quantity: 1,
     });
 
-    const session = await stripe.checkout.session.create({
-      line_items: line_items,
-      mode: "payment",
-      success_url: `${CLIENT_DOMAIN}/verify?success=true&orderId=${newOrder._id}`,
-      cancel_url: `${CLIENT_DOMAIN}/verify?success=false&orderId=${newOrder._id}`,
-    });
+    const session = await stripe.checkout.sessions.create(
+      {
+        line_items: line_items,
+        mode: "payment",
+        success_url: `${CLIENT_DOMAIN}/verify?success=true&orderId=${newOrder._id}`,
+        cancel_url: `${CLIENT_DOMAIN}/verify?success=false&orderId=${newOrder._id}`,
+      },
+      { apiKey: process.env.STRIPE_SECRET_KEY }
+    );
 
     return res.json({
       success: true,
@@ -58,4 +61,21 @@ const placeOrder = async (req, res) => {
   }
 };
 
-export { placeOrder };
+const verifyOrder = async (req, res) => {
+  const { orderId, success } = req.body;
+
+  try {
+    if (success == "true") {
+      await orderModel.findByIdAndUpdate(orderId, { payment: true });
+      res.json({ success: true, message: "Order Placed." });
+    } else {
+      await orderModel.findByIdAndDelete(orderId);
+      res.json({ success: false, message: "Payment failed." });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Payment failed. Try again later." });
+  }
+};
+
+export { placeOrder, verifyOrder };

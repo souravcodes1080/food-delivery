@@ -8,6 +8,7 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
+  const [email, setEmail] = useState("");
   const [food_list, setfood_list] = useState([]);
 
   const fetchFoodList = async () => {
@@ -88,10 +89,10 @@ const StoreContextProvider = (props) => {
 
   useEffect(() => {
     // async function loadData() {
-      if (localStorage.getItem("Token")) {
-        setToken(localStorage.getItem("Token"));
-         loadCartData(localStorage.getItem("Token"));
-      }
+    if (localStorage.getItem("Token")) {
+      setToken(localStorage.getItem("Token"));
+      loadCartData(localStorage.getItem("Token"));
+    }
     // }
     // loadData();
     fetchFoodList();
@@ -105,6 +106,8 @@ const StoreContextProvider = (props) => {
     getTotalCartAmount,
     token,
     setToken,
+    email,
+    setEmail,
   };
 
   return (
