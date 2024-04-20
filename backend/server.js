@@ -29,6 +29,11 @@ app.use("/api/cart", cartRouter);
 //order api
 app.use("/api/order", orderRouter)
 
+app.get("/", (req,res)=>{
+  res.send("Hello")
+  console.log("hello")
+})
+
 app.listen(process.env.PORT, () => {
   console.log("Server is running in:-> " + process.env.DOMAIN);
 });
