@@ -1,0 +1,5 @@
+services:
+  - name: my-express-app
+    type: web
+    buildCommand: npm run build
+    startCommand: npm start
