@@ -19,7 +19,27 @@ a {
 
 .app {
     width: 80%;
-    margin: auto;
+    margin: auto;  
+}
+.loader-wrapper{
+    margin: 20vh 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loader{
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    border: 7px solid #bdbdbd;
+    border-right-color: tomato ;
+    animation: spin 2s infinite ;
+}
+@keyframes spin {
+    100%{
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes fade-in {
