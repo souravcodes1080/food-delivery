@@ -88,4 +88,15 @@ const userOrder = async (req, res) =>{
     res.json({ success: false, message: "Order Fetching failed." });
   }
 }
-export { placeOrder, verifyOrder, userOrder };
+
+//admin panel order list
+const listOrders = async (req, res)=>{
+  try {
+    const orders = await orderModel.find({})
+    res.json({success: true, data: orders})
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Order Fetching failed." });
+  }
+}
+export { placeOrder, verifyOrder, userOrder, listOrders };
