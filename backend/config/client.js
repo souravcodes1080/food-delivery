@@ -1,1 +1,1 @@
-export const CLIENT_DOMAIN = 'https://tomato-client.vercel.app'
+export const CLIENT_DOMAIN = 'https://tomato-food-delivery.onrender.com'
