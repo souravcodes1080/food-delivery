@@ -60,18 +60,19 @@ function PlaceOrder() {
     if (response.data.success) {
       const { session_url } = response.data;
       setLoading(false);
-      window.location.replace(session_url);
+      // window.location.replace(session_url);
+      window.location.href(session_url);
     } else {
       toast.error(response.data.message);
     }
   };
 
-  useEffect(()=>{
-    if(!localStorage.getItem("Token")){
-      toast.warn("Please login to continue.")
-      navigate('/cart')
+  useEffect(() => {
+    if (!localStorage.getItem("Token")) {
+      toast.warn("Please login to continue.");
+      navigate("/cart");
     }
-  }, [token, navigate])
+  }, [token, navigate]);
   return (
     <>
       {getTotalCartAmount() > 0 ? (
