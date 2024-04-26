@@ -47,6 +47,7 @@ const placeOrder = async (req, res) => {
       { apiKey: process.env.STRIPE_SECRET_KEY }
     );
 
+    console.log(session.success_url)
     return res.json({
       success: true,
       session_url: session.url,
