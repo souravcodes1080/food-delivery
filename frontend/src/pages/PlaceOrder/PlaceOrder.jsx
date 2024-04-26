@@ -60,8 +60,8 @@ function PlaceOrder() {
     if (response.data.success) {
       const { session_url } = response.data;
       setLoading(false);
-      navigate(session_url);
-      console.log(session_url)
+      window.location.replace(session_url)
+      
     } else {
       toast.error(response.data.message);
     }
