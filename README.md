@@ -26,3 +26,13 @@ It has an admin panel where we can track order, add / update new food items, and
 <img src="https://res.cloudinary.com/dz0jdw5kw/image/upload/v1714390354/github/Screenshot_2024-04-29_170200_rxyy1j.png">
 
 
+# How to run in your local server?
+1. Clone this repo.
+2. Open each directory in separate terminals.
+3. "npm install" in all 3 terminals.
+4. Finally, "npm run dev" in all 3 terminals.
+
+# Access the live version - 
+
+<a href="https://tomato-food-delivery.onrender.com">
+Website 🌐 </a>
