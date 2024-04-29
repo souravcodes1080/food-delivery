@@ -6,6 +6,7 @@
     border-radius: 20px;
     background-size: contain;
     position: relative;
+    background-repeat: no-repeat;
 }
 
 .header-content {
