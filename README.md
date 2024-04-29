@@ -1,8 +1,28 @@
-# React + Vite
+# Tomato - Food Ordering App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p> This is a web app built using React JS for frontend and Node JS, Express for creating the REST APIs along with Mongo DB to store data. 
+</p>
+<p>
+It has an admin panel where we can track order, add / update new food items, and edit order status.
+</p>
 
-Currently, two official plugins are available:
+# Tech Stack used:- 
+- React JS
+- Node JS
+- Express 
+- Mongo DB
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+<img src="https://res.cloudinary.com/dz0jdw5kw/image/upload/v1714389606/github/Screenshot_2024-04-29_164415_jg0lrh.png">
+&nbsp;
+<img src="https://res.cloudinary.com/dz0jdw5kw/image/upload/v1714389606/github/Screenshot_2024-04-29_164659_gjw7px.png">
+&nbsp;
+<img src="https://res.cloudinary.com/dz0jdw5kw/image/upload/v1714389605/github/Screenshot_2024-04-29_164623_mo5sqd.png">
+&nbsp;
+<img src="https://res.cloudinary.com/dz0jdw5kw/image/upload/v1714389606/github/Screenshot_2024-04-29_164446_d7djcf.png">
+&nbsp;
+<img src="https://res.cloudinary.com/dz0jdw5kw/image/upload/v1714390353/github/Screenshot_2024-04-29_170143_duif08.png">
+&nbsp;
+<img src="https://res.cloudinary.com/dz0jdw5kw/image/upload/v1714390354/github/Screenshot_2024-04-29_170200_rxyy1j.png">
+
+
