@@ -30,7 +30,7 @@ function Cart() {
                     <div key={index}>
                       <div className="cart-items-title cart-items-item">
                         <img
-                          src={`${DOMAIN}/images/${item.image}`}
+                          src={item.image}
                           alt="product"
                         />
                         <p>{item.name}</p>
