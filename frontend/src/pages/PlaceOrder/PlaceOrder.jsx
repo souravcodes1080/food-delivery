@@ -7,7 +7,7 @@ import { DOMAIN } from "../../config";
 import { toast } from "react-toastify";
 import axios from "axios";
 function PlaceOrder() {
-  const { getTotalCartAmount, token, food_list, cartItems } =
+  const { getTotalCartAmount, token, food_list, cartItems, promoApplied } =
     useContext(StoreContext);
 
   const navigate = useNavigate();
@@ -45,7 +45,10 @@ function PlaceOrder() {
     let orderData = {
       address: data,
       items: orderItems,
-      amount: getTotalCartAmount() + 2,
+      amount: promoApplied
+        ? getTotalCartAmount() + 30 + 5 - 25
+        : getTotalCartAmount() + 30 + 5,
+        promoApplied
     };
     setLoading(true);
     let response = await axios.post(
@@ -60,8 +63,7 @@ function PlaceOrder() {
     if (response.data.success) {
       const { session_url } = response.data;
       setLoading(false);
-      window.location.replace(session_url)
-      
+      window.location.replace(session_url);
     } else {
       toast.error(response.data.message);
     }
@@ -170,18 +172,41 @@ function PlaceOrder() {
                   <hr />
                   <div className="cart-total-details">
                     <p>Delivery Fee + gst</p>
-                    <p>₹{30}</p>
+                    <p>₹{25}</p>
                   </div>
-                  <hr/>
+                  <hr />
                   <div className="cart-total-details">
                     <p>Platform Fee</p>
                     <p>₹{5}</p>
                   </div>
-                  <hr />
-                  <div className="cart-total-details">
-                    <p>Total</p>
-                    <p>₹{getTotalCartAmount() +  30 + 5}</p>
-                  </div>
+                  {promoApplied && (
+                    <>
+                      <hr />
+                      <div className="cart-total-details">
+                        <p>Discount</p>
+                        <p>- ₹{25}</p>
+                      </div>
+                    </>
+                  )}
+                  {promoApplied ? (
+                    <>
+                      {" "}
+                      <hr />
+                      <div className="cart-total-details">
+                        <p>Total</p>
+                        <p>₹{getTotalCartAmount() + 25 + 5 - 25}</p>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {" "}
+                      <hr />
+                      <div className="cart-total-details">
+                        <p>Total</p>
+                        <p>₹{getTotalCartAmount() + 30 + 5}</p>
+                      </div>
+                    </>
+                  )}
                 </div>
                 <button type="submit">
                   {loading ? "Processing..." : "Proceed to Payment"}

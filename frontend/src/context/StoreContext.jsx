@@ -10,6 +10,7 @@ const StoreContextProvider = (props) => {
   const [token, setToken] = useState("");
   const [email, setEmail] = useState("");
   const [food_list, setfood_list] = useState([]);
+  const [promoApplied, setPromoApplied] = useState(false)
   const [loading, setLoading] = useState(false)
   const fetchFoodList = async () => {
     setLoading(true)
@@ -88,6 +89,9 @@ const StoreContextProvider = (props) => {
     }
     return totalAmount;
   };
+  const applyPromoC = ()=>{
+    setPromoApplied(true)
+  }
 
   useEffect(() => {
     // async function loadData() {
@@ -110,6 +114,8 @@ const StoreContextProvider = (props) => {
     setToken,
     email,
     setEmail,
+    promoApplied,
+    applyPromoC,
     loading
   };
 
