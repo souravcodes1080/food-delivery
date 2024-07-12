@@ -30,9 +30,19 @@ const placeOrder = async (req, res) => {
       price_data: {
         currency: "inr",
         product_data: {
-          name: "Delivery Charges",
+          name: "Delivery Charges + gst",
         },
         unit_amount: 30 * 100,
+      },
+      quantity: 1,
+    });
+    line_items.push({
+      price_data: {
+        currency: "inr",
+        product_data: {
+          name: "Platform Fees",
+        },
+        unit_amount: 5 * 100,
       },
       quantity: 1,
     });
