@@ -110,13 +110,14 @@ function Add() {
                 value={data.category}
               >
                 <option value="">- Select a category -</option>
-                <option value="Salad">Salad</option>
-                <option value="Rolls">Rolls</option>
+                <option value="Starter">Starter</option>
+                <option value="Momos">Momos</option>
+                <option value="Soup">Soup</option>
+                <option value="Rice & Noodles">Rice & Noodles</option>
+                <option value="Special Combo">Special Combo</option>
                 <option value="Deserts">Deserts</option>
-                <option value="Sandwich">Sandwich</option>
-                <option value="Cake">Cake</option>
-                <option value="Pasta">Pasta</option>
-                <option value="Noodles">Noodles</option>
+                <option value="Special Drinks">Special Drinks</option>
+                <option value="Hot Drinks">Hot Drinks</option>
               </select>
             </div>
             <div className="add-price flex-col">
