@@ -7,6 +7,10 @@ function Sidebar() {
     <>
         <div className="sidebar">
             <div className="sidebar-options">
+                <NavLink to={"/"} className="sidebar-option">
+                    <img src={assets.add_icon} alt="add" />
+                    <p>Dashboard</p>
+                </NavLink>
                 <NavLink to={"/add"} className="sidebar-option">
                     <img src={assets.add_icon} alt="add" />
                     <p>Add Food</p>

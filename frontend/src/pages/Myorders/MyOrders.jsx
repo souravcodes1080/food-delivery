@@ -41,7 +41,7 @@ function MyOrders() {
           </> : <><div className="my-orders">
             <h2>My Orders</h2>
             <div className="container">
-              {data.map((order, index) => {
+              {data.reverse().map((order, index) => {
                 return (
                   <div key={index} className="my-orders-order">
                     <img src={assets.parcel_icon} alt="parcel" />

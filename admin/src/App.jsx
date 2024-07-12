@@ -8,6 +8,7 @@ import Orders from "./pages/Orders/Orders";
 import Update from "./pages/Update/Update";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Login from "./pages/Login/Login";
 function App() {
   return (
     <>
@@ -19,6 +20,7 @@ function App() {
         <Sidebar />
         <div className="inner-body">
           <Routes>
+        <Route path="/"  exact element={<Login />} />
             <Route path="/add" element={<Add />} />
             <Route path="/list" element={<List />} />
             <Route path="/orders" element={<Orders />} />

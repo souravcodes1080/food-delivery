@@ -37,7 +37,7 @@ function Orders() {
       <div className="order add">
         <h3>Order page</h3>
         <div className="order-list">
-          {orders.map((order, index) => (
+          {orders.reverse().map((order, index) => (
             <div key={index} className="order-item">
               <img src={assets.parcel_icon} alt="parcel" />
               <div>
