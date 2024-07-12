@@ -3,7 +3,8 @@ import fs from "fs";
 
 //add food
 const addFood = async (req, res) => {
-  let image_filename = `${req.file.filename}`;
+  // Cloudinary provides the image URL in the 'path' property
+  const image_url = req.file.path;
 
   const food = new foodModel({
     available: req.body.available,
@@ -12,7 +13,7 @@ const addFood = async (req, res) => {
     description: req.body.description,
     price: req.body.price,
     category: req.body.category,
-    image: image_filename,
+    image: image_url, // Save the Cloudinary URL to the database
   });
 
   try {

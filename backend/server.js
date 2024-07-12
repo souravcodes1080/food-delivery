@@ -18,7 +18,7 @@ connectDb();
 //api endpoints
 //food api
 app.use("/api/food", foodRouter);
-app.use("/images", express.static("uploads"));
+// app.use("/images", express.static("uploads"));
 
 //user api
 app.use("/api/user", userRouter);
@@ -35,5 +35,5 @@ app.get("/", (req,res)=>{
 })
 
 app.listen(process.env.PORT, () => {
-  console.log("Server is running in:-> " + process.env.DOMAIN);
+  console.log("Server is running in: " + process.env.DOMAIN);
 });

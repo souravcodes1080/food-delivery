@@ -48,7 +48,7 @@ function List() {
                   className={
                     item.available ? "food-image" : "food-image opacity"
                   }
-                  src={`${DOMAIN}/images/` + item.image}
+                  src={item.image}
                   alt={item.name}
                 />
                 <p className={item.available ? "" : "opacity"}>{item.name}</p>
