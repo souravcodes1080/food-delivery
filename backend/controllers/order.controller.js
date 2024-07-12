@@ -12,6 +12,7 @@ const placeOrder = async (req, res) => {
       items: req.body.items,
       amount: req.body.amount,
       address: req.body.address,
+      promoApplied: req.body.promoApplied
     });
     await newOrder.save();
     await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
@@ -46,6 +47,18 @@ const placeOrder = async (req, res) => {
       },
       quantity: 1,
     });
+    if(promoApplied){
+      line_items.push({
+        price_data: {
+          currency: "inr",
+          product_data: {
+            name: "Discount",
+          },
+          unit_amount: -25,
+        },
+        quantity: 1,
+      });
+    }
 
     const session = await stripe.checkout.sessions.create(
       {
