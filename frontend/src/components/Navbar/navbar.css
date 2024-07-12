@@ -1,3 +1,26 @@
+.top-navbar{
+    background-color: #323232;
+    color: white;
+    text-align: center;
+    padding:5px 0;
+    visibility: hidden;
+    animation-name: slideIn;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-delay: 1s;
+    animation-fill-mode: forwards; 
+}
+
+@keyframes slideIn {
+    0% {
+        visibility: visible;
+        transform: translateY(-100%); /* Start off-screen to the top */
+    }
+    100% {
+        visibility: visible;
+        transform: translateY(0); /* Slide in to its original position */
+    }
+}
 .navbar {
     padding: 20px 0;
     display: flex;

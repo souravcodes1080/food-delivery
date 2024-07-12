@@ -9,7 +9,7 @@ function LoginPopup({ setShowLogin }) {
   const { setToken, setEmail } = useContext(StoreContext);
   const [currState, setCurrState] = useState("Sign Up");
   const [showPassword, setShowPassword] = useState(true);
-
+const [loading, setLoading] = useState(false)
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -26,6 +26,7 @@ function LoginPopup({ setShowLogin }) {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (currState === "Sign Up") {
+      setLoading(true);
       const response = await axios.post(`${DOMAIN}/api/user/register`, {
         name: userData.name,
         email: userData.email,
@@ -33,23 +34,26 @@ function LoginPopup({ setShowLogin }) {
       });
       if (response.data.success) {
         // toast.success(response.data.message);
-        setToken(response.data.token)
-        localStorage.setItem("Token", response.data.token)
+        setToken(response.data.token);
+        localStorage.setItem("Token", response.data.token);
         setCurrState("Login");
+        setLoading(false)
       } else {
         // toast.error(response.data.message);
       }
     } else if (currState === "Login") {
+      setLoading(true)
       const response = await axios.post(`${DOMAIN}/api/user/login`, {
         email: userData.email,
         password: userData.password,
       });
       if (response.data.success) {
         // toast.success(response.data.message);
-        setEmail(response.data.email)
-        localStorage.setItem("Email", response.data.email)
-        localStorage.setItem("Token", response.data.token)
+        setEmail(response.data.email);
+        localStorage.setItem("Email", response.data.email);
+        localStorage.setItem("Token", response.data.token);
         setShowLogin(false);
+        setLoading(false)
       } else {
         // toast.error(response.data.message);
       }
@@ -109,7 +113,9 @@ function LoginPopup({ setShowLogin }) {
             </div>
           </div>
           <button type="submit">
-            {currState === "Sign Up" ? "Create account" : "Login"}
+            {currState === "Sign Up"
+              ? `${!loading ? " Create account" : "Processing..."}`
+              : `${!loading ? " Login" : "Log in..."}`}
           </button>
           <div className="login-condition">
             <input type="checkbox" required />
