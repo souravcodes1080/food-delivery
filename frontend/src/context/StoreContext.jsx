@@ -89,8 +89,8 @@ const StoreContextProvider = (props) => {
     }
     return totalAmount;
   };
-  const applyPromoC = ()=>{
-    setPromoApplied(true)
+  const applyPromoC = (x)=>{
+    setPromoApplied(x)
   }
 
   useEffect(() => {

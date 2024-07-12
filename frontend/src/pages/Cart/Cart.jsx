@@ -5,21 +5,44 @@ import { assets } from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { DOMAIN } from "../../config";
 function Cart() {
-  const { cartItems, food_list, removeFromCart, getTotalCartAmount,promoApplied, applyPromoC } =
-    useContext(StoreContext);
+  const {
+    cartItems,
+    food_list,
+    removeFromCart,
+    getTotalCartAmount,
+    promoApplied,
+    applyPromoC,
+  } = useContext(StoreContext);
   const navigate = useNavigate();
   const [promo, setPromo] = useState("");
   const [validPromo, setValidPromo] = useState("");
 
-  const applyPromo = () => {
+  useEffect(() => {
     if (promo === "TAYLOR25") {
+      if (getTotalCartAmount() >= 150) {
+        setValidPromo("Promo code applied successfully!");
+        applyPromoC(true);
+      } else {
+        setValidPromo("Cart value must be more than ₹150 to avail this offer!");
+        applyPromoC(false);
+      }
+    }
+  }, [cartItems, getTotalCartAmount, applyPromoC]);
+
+  const applyPromo = () => {
+    if (promo === "TAYLOR25" && getTotalCartAmount() >= 150) {
       setValidPromo("Promo code applied sucessfully!");
-      applyPromoC()
+      applyPromoC(true);
+    }
+    else if (promo === "TAYLOR25" && getTotalCartAmount() < 150) {
+      setValidPromo("Cart value must be more than ₹150 to avail this offer!");
+      applyPromoC(false)
     } else {
       setValidPromo("Invalid Promo code.");
+      applyPromoC(false)
     }
   };
-  // useEffect(()=>{applyPromo}, [cartItems])
+  useEffect(()=>{applyPromo}, [cartItems])
   return (
     <>
       {getTotalCartAmount() > 0 ? (
@@ -77,7 +100,7 @@ function Cart() {
                     <p>Platform Fee</p>
                     <p>₹{5}</p>
                   </div>
-                  {promoApplied && (
+                  {promoApplied && getTotalCartAmount() >= 150 && (
                     <>
                       <hr />
                       <div className="cart-total-details">
@@ -87,7 +110,7 @@ function Cart() {
                     </>
                   )}
                   <hr />
-                  {promoApplied ? (
+                  {promoApplied && getTotalCartAmount() >=150 ? (
                     <div className="cart-total-details">
                       <p>Total</p>
                       <p>₹{getTotalCartAmount() + 25 + 5 - 25}</p>

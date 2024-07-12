@@ -203,7 +203,7 @@ function PlaceOrder() {
                       <hr />
                       <div className="cart-total-details">
                         <p>Total</p>
-                        <p>₹{getTotalCartAmount() + 30 + 5}</p>
+                        <p>₹{getTotalCartAmount() + 25 + 5}</p>
                       </div>
                     </>
                   )}
