@@ -170,7 +170,7 @@ function PlaceOrder() {
                   <hr />
                   <div className="cart-total-details">
                     <p>Delivery Fee</p>
-                    <p>${2}</p>
+                    <p>₹{30}</p>
                   </div>
                   <hr />
                   <div className="cart-total-details">

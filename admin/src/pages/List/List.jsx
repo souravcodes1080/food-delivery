@@ -55,7 +55,7 @@ function List() {
                 <p className={item.available ? "hide" : "hide opacity"}>
                   {item.category}
                 </p>
-                <p className={item.available ? "" : "opacity"}>${item.price}</p>
+                <p className={item.available ? "" : "opacity"}>₹{item.price}</p>
                 <Link to={`/update/${item._id}`}>
                   <p
                     className={

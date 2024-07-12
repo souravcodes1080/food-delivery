@@ -109,7 +109,7 @@ function Update() {
                 type="number"
                 name="price"
                 value={data.price}
-                placeholder="$20"
+                placeholder="₹100"
                 onChange={onChangeHandler}
               />
             </div>

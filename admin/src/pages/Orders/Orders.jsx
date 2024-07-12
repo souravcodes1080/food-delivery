@@ -68,7 +68,7 @@ function Orders() {
                 <p className="order-item-phone">{order.address.phone}</p>
               </div>
               <p>Items : {order.items.length}</p>
-              <p>${order.amount}</p>
+              <p>₹{order.amount}</p>
               <select
                 onChange={(e) => statusHandler(e, order._id)}
                 value={order.status}
