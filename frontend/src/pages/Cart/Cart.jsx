@@ -60,13 +60,18 @@ function Cart() {
                   </div>
                   <hr />
                   <div className="cart-total-details">
-                    <p>Delivery Fee</p>
-                    <p>₹{2}</p>
+                    <p>Delivery Fee + gst</p>
+                    <p>₹{30}</p>
+                  </div>
+                  <hr/>
+                  <div className="cart-total-details">
+                    <p>Platform Fee</p>
+                    <p>₹{5}</p>
                   </div>
                   <hr />
                   <div className="cart-total-details">
                     <p>Total</p>
-                    <p>₹{getTotalCartAmount() + 30}</p>
+                    <p>₹{getTotalCartAmount() + 30 + 5}</p>
                   </div>
                 </div>
                 <button onClick={() => navigate("/order")}>

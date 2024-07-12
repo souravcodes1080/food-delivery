@@ -165,17 +165,22 @@ function PlaceOrder() {
                 <div>
                   <div className="cart-total-details">
                     <p>Subtotal</p>
-                    <p>${getTotalCartAmount()}</p>
+                    <p>₹{getTotalCartAmount()}</p>
                   </div>
                   <hr />
                   <div className="cart-total-details">
-                    <p>Delivery Fee</p>
+                    <p>Delivery Fee + gst</p>
                     <p>₹{30}</p>
+                  </div>
+                  <hr/>
+                  <div className="cart-total-details">
+                    <p>Platform Fee</p>
+                    <p>₹{5}</p>
                   </div>
                   <hr />
                   <div className="cart-total-details">
                     <p>Total</p>
-                    <p>${getTotalCartAmount() + 2}</p>
+                    <p>₹{getTotalCartAmount() +  30 + 5}</p>
                   </div>
                 </div>
                 <button type="submit">

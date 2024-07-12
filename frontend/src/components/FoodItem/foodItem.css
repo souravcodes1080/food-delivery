@@ -9,11 +9,18 @@
 
 .food-item img {
     width: 100%;
+    /* height: 200px; */
     border-radius: 15px 15px 0 0;
+}
+.food-item-image{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 }
 
 .food-item-info {
     padding: 20px;
+    /* min-height: 200px; */
 }
 
 .food-item-name-rating {
@@ -34,6 +41,7 @@
 .food-item-desc{
     color: #676767;
     font-size: 14px;
+    min-height: 70px;
 }
 
 .food-item-price{
