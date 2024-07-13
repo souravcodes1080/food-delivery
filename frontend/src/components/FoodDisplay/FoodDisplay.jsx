@@ -62,15 +62,44 @@ function FoodDisplay({ category }) {
         <div className="location">
           <h6> :(</h6>
           <p className="location-error">
-            We couldn't fetch your location. Please enable location services
-            and refresh the page.
+            We couldn't fetch your location. Please enable location services and
+            refresh the page.
           </p>
         </div>
       ) : (
         <div className="food-display" id="food-display">
-          {food_list.map((item, index) => {
-            //TODO: Fix map fn() error {key}
-            if (
+          <div className="food-display-list" >
+            {food_list.map((item, index) => {
+              // Check if userLocation is available and if the distance is within 10 km
+              if (
+                userLocation &&
+                calculateDistance(
+                  userLocation.latitude,
+                  userLocation.longitude,
+                  26.7693514,
+                  88.3774669
+                ) <= 10 &&
+                (category === "All" || category === item.category)
+              ) {
+                return (
+                  <FoodItem
+                  key={item._id}
+                    id={item._id}
+                    name={item.name}
+                    description={item.description}
+                    price={item.price}
+                    image={item.image}
+                    category={item.category}
+                  />
+                );
+              } else {
+                return null;
+              }
+            })}
+          </div>
+          {!food_list.some(
+            (item) =>
+              (category === "All" || category === item.category) &&
               userLocation &&
               calculateDistance(
                 userLocation.latitude,
@@ -78,38 +107,19 @@ function FoodDisplay({ category }) {
                 26.7693514,
                 88.3774669
               ) <= 10
-            ) {
-              if (category === "All" || category === item.category) {
-                return (
-                  <div className="food-display-list" key={item._id}>
-                    <FoodItem
-                    key={item._id}
-                      id={item._id}
-                      name={item.name}
-                      description={item.description}
-                      price={item.price}
-                      image={item.image}
-                    />
-                  </div>
-                );
-              }
-            } else {
-              return (
-                <div className="location">
-                  <h6>:( </h6>
-                  <p className="error">
-                    We are not available at your location. We serve only within
-                    10km radius.
-                  </p>
-                  <p className="sol">
-                    If you are a developer, go ahead and change your browser's
-                    lat & long to 26.7693514 & 88.3774669. (For testing purpose only).  
-                  </p>
-                </div>
-              );
-            }
-            return null;
-          })}
+          ) && (
+            <div className="location" key="location-error">
+              <h6>:( </h6>
+              <p className="error">
+                We are not available at your location. We serve only within 10km
+                radius.
+              </p>
+              <p className="sol">
+                If you are a developer, go ahead and change your browser's lat &
+                long to 26.7693514 & 88.3774669. (For testing purpose only).
+              </p>
+            </div>
+          )}
         </div>
       )}
     </>

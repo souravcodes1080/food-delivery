@@ -37,7 +37,22 @@
     width: 70px;
     border-radius: 0;
 }
+.food-item-rating{
+    width: 100%;
+    border-radius: 0;
+    display: flex; 
+    justify-content: flex-end;
+}
+.food-item-rating img{
+    width: 70px;
 
+}
+.bubble{
+    font-size: 13px;
+    padding: 4px 10px;
+    background-color: rgba(213, 213, 213, 0.494);
+    border-radius:50px ;
+}
 .food-item-desc{
     color: #676767;
     font-size: 14px;

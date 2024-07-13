@@ -3,7 +3,7 @@ import "./foodItem.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
 import { DOMAIN } from "../../config";
-function FoodItem({ id, name, price, description, image }) {
+function FoodItem({ id, name, price, description, image, category }) {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
   return (
     <>
@@ -36,10 +36,17 @@ function FoodItem({ id, name, price, description, image }) {
         <div className="food-item-info">
           <div className="food-item-name-rating">
             <p>{name}</p>
-            <img src={assets.rating_starts} alt="" />
           </div>
           <p className="food-item-desc">{description}</p>
+          <div className="food-item-name-rating">
+
           <p className="food-item-price">₹{price}</p>
+          <div className="bubble">{category}</div>
+          </div>
+
+          <div className="food-item-rating">
+            <img src={assets.rating_starts} alt="" />
+          </div>
         </div>
       </div>
     </>
