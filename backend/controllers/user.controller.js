@@ -2,6 +2,7 @@ import userModel from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import validator from "validator";
+import { sendWelcomeMail } from "../middleware/nodemailer.js";
 
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET);
@@ -66,6 +67,9 @@ const registerUser = async (req, res) => {
 
     //token generation
     const token = createToken(user._id);
+
+    //send welcome mail
+    sendWelcomeMail(email,name)
     if (user) {
       return res.json({
         success: true,

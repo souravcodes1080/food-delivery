@@ -2,6 +2,10 @@ import orderModel from "../models/order.model.js";
 import userModel from "../models/user.model.js";
 import Stripe from "stripe";
 import { CLIENT_DOMAIN } from "../config/client.js";
+import {
+  sendOrderConfirmNotif,
+  sendOrderStatusNotif,
+} from "../middleware/nodemailer.js";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 //placing user order from frontend
@@ -12,7 +16,7 @@ const placeOrder = async (req, res) => {
       items: req.body.items,
       amount: req.body.amount,
       address: req.body.address,
-      cod: false
+      cod: false,
     });
 
     const line_items = req.body.items.map((item) => ({
@@ -83,13 +87,13 @@ const cod = async (req, res) => {
       items: req.body.items,
       amount: req.body.amount,
       address: req.body.address,
-      cod: true
+      cod: true,
     });
-    
+
     await newOrder.save();
     await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
-    
-    const success_url=`${CLIENT_DOMAIN}/verify?success=ok&orderId=${newOrder._id}`
+
+    const success_url = `${CLIENT_DOMAIN}/verify?success=ok&orderId=${newOrder._id}`;
     return res.json({
       success: true,
       session_url: success_url,
@@ -104,25 +108,40 @@ const cod = async (req, res) => {
   }
 };
 
-
 const verifyOrder = async (req, res) => {
   const { orderId, success } = req.body;
 
   try {
-    if (success == "true") {
+    if (success === "true") {
       await orderModel.findByIdAndUpdate(orderId, { payment: true });
+      const orderDetails = await orderModel.findById(orderId);
+      sendOrderConfirmNotif(
+        orderDetails.address.email,
+        orderDetails.address.firstName,
+        orderDetails.address.street,
+        orderDetails.address.phone,
+        orderDetails.amount,
+        false
+      );
       res.json({ success: true, message: "Order Placed." });
-    }
-    else if(success == "ok"){
+    } else if (success === "ok") {
       await orderModel.findByIdAndUpdate(orderId, { payment: false });
+      const orderDetails = await orderModel.findById(orderId);
+      sendOrderConfirmNotif(
+        orderDetails.address.email,
+        orderDetails.address.firstName,
+        orderDetails.address.street,
+        orderDetails.address.phone,
+        orderDetails.amount,
+        true
+      );
       res.json({ success: true, message: "Order Placed via COD." });
-    }
-    else {
+    } else {
       await orderModel.findByIdAndDelete(orderId);
       res.json({ success: false, message: "Payment failed." });
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.json({ success: false, message: "Payment failed. Try again later." });
   }
 };
@@ -131,7 +150,10 @@ const verifyOrder = async (req, res) => {
 const userOrder = async (req, res) => {
   try {
     const orders = await orderModel.find({
-      $and: [{ userId: req.body.userId },{ $or: [{ payment: true }, {cod:true}]}],
+      $and: [
+        { userId: req.body.userId },
+        { $or: [{ payment: true }, { cod: true }] },
+      ],
     });
     res.json({ success: true, data: orders });
   } catch (error) {
@@ -143,7 +165,9 @@ const userOrder = async (req, res) => {
 //admin panel order list
 const listOrders = async (req, res) => {
   try {
-    const orders = await orderModel.find({ $or: [{ payment: true }, {cod:true}]} );
+    const orders = await orderModel.find({
+      $or: [{ payment: true }, { cod: true }],
+    });
     res.json({ success: true, data: orders });
   } catch (error) {
     console.log(error);
@@ -157,6 +181,17 @@ const updateStatus = async (req, res) => {
     await orderModel.findByIdAndUpdate(req.body.orderId, {
       status: req.body.status,
     });
+    const status = req.body.status;
+    const orderDetails = await orderModel.findById(req.body.orderId);
+    sendOrderStatusNotif(
+      orderDetails.address.email,
+      orderDetails.address.firstName,
+      orderDetails.address.street,
+      orderDetails.address.phone,
+      orderDetails.amount,
+      orderDetails.cod,
+      status
+    );
     res.json({ success: true, message: "Order status updated." });
   } catch (error) {
     console.log(error);
@@ -166,4 +201,4 @@ const updateStatus = async (req, res) => {
     });
   }
 };
-export { placeOrder,cod, verifyOrder, userOrder, listOrders, updateStatus };
+export { placeOrder, cod, verifyOrder, userOrder, listOrders, updateStatus };
