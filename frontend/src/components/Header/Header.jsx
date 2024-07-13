@@ -8,10 +8,7 @@ function Header() {
           <div className="header-content">
           <h2>Mumbai style chinese restaurant.</h2>
           <p>
-          Order your favourite food here.
-           Explicabo fuga possimus expedita
-            odio molestias. Quaerat, repellendus? Voluptate delectus architecto
-            vero nostrum laborum? Ducimus, magnam.
+          Order delicious Chinese cuisine online now! Choose from a variety of options, including savory dumplings, flavorful stir-fries, aromatic noodle dishes, and more. Treat yourself to authentic flavors delivered straight to your door.
           </p>
           <a href="#explore-menu"><button>View Menu &nbsp; &rarr;</button></a>
         </div> 

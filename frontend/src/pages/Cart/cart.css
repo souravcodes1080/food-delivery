@@ -88,6 +88,12 @@
    color: white;
    border-radius: 4px;
 }
+.promo-info{
+    padding: 15px;
+    margin-top: 30px;
+    border-radius: 7px;
+    background-color: rgba(213, 213, 213, 0.468);
+}
 .empty-cart{
     display: flex;
     flex-direction: column;

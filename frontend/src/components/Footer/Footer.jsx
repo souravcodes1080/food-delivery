@@ -9,9 +9,7 @@ function Footer() {
           <div className="footer-content-left">
             <img src={assets.logo2} alt="logo" width={"290px"}/>
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Perspiciatis earum eum libero iure voluptatem. Placeat omnis
-              necessitatibus amet pariatur numquam?
+              Mumbai style chinese restaurant. Order food online. We only have one branch currently and deliver within the radius of 10km only.
             </p>
             <div className="footer-social-icons">
               <img src={assets.facebook_icon} alt="fb" />
@@ -33,6 +31,7 @@ function Footer() {
             <ul>
                 <li>+91 67690 98264</li>
                 <li>contact@thh.com</li>
+                <li>Salbari, Sukna, Siliguri, West Bengal, IN - 734001</li>
             </ul>
           </div>
         </div>
@@ -40,6 +39,7 @@ function Footer() {
         <p className="footer-copyright">
             Copyright 2024 @ thh.com - All Right Reserved.
         </p>
+        <p>This project is purely for educational purposes, no real business transactions are involved. All food data is owned by The Hungry Helper Group.</p>
       </div>
     </>
   );

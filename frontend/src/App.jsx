@@ -18,6 +18,9 @@ function App() {
       <ToastContainer />
       <div className="top-navbar">
         <p>
+          Our bots are working hard to add new food items. 
+        </p>
+        <p>
           We are currently using free servers to host backend, so please be
           patient. 😊{" "}
         </p>

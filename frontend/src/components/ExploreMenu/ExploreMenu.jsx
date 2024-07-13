@@ -7,9 +7,7 @@ function ExploreMenu({ category, setCategory }) {
       <div className="explore-menu" id="explore-menu">
         <h1>Explore our menu</h1>
         <p className="explore-menu-text">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas ut enim
-          incidunt fugiat illo voluptates, porro expedita nostrum ducimus
-          maiores.
+          We offer a diverse menu featuring everything from momos to noodles, rice, and more—all with a Chinese flair. We also have a selection of special drinks. Explore and choose from our wide array of options!
         </p>
         <div className="explore-menu-list">
           {menu_list.map((item, index) => (

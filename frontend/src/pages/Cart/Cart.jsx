@@ -33,16 +33,17 @@ function Cart() {
     if (promo === "TAYLOR25" && getTotalCartAmount() >= 150) {
       setValidPromo("Promo code applied sucessfully!");
       applyPromoC(true);
-    }
-    else if (promo === "TAYLOR25" && getTotalCartAmount() < 150) {
+    } else if (promo === "TAYLOR25" && getTotalCartAmount() < 150) {
       setValidPromo("Cart value must be more than ₹150 to avail this offer!");
-      applyPromoC(false)
+      applyPromoC(false);
     } else {
       setValidPromo("Invalid Promo code.");
-      applyPromoC(false)
+      applyPromoC(false);
     }
   };
-  useEffect(()=>{applyPromo}, [cartItems])
+  useEffect(() => {
+    applyPromo;
+  }, [cartItems]);
   return (
     <>
       {getTotalCartAmount() > 0 ? (
@@ -110,7 +111,7 @@ function Cart() {
                     </>
                   )}
                   <hr />
-                  {promoApplied && getTotalCartAmount() >=150 ? (
+                  {promoApplied && getTotalCartAmount() >= 150 ? (
                     <div className="cart-total-details">
                       <p>Total</p>
                       <p>₹{getTotalCartAmount() + 25 + 5 - 25}</p>
@@ -140,6 +141,13 @@ function Cart() {
                   </div>
                   <p>{validPromo}</p>
                 </div>
+                {!promoApplied && <div className="promo-info">
+                  <p>
+                    O hi! Since you are here, delivery charges are on us! Apply
+                    "TAYLOR25" code avail offer!
+                    Cart value must be 150 or above*
+                  </p>
+                </div>}
               </div>
             </div>
           </div>
