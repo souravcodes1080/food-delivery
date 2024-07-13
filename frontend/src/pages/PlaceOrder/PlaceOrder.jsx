@@ -250,11 +250,15 @@ function PlaceOrder() {
                   )}
                 </div>
                 <button type="submit" className="pay-online">
-                  {loading ? "Processing..." : "Proceed to Payment"} <img src={assets.card} /> <img src={assets.upi} />
+                  {loading ? "Processing..." : "Pay online"} <img src={assets.card} /> <img src={assets.upi} />
                 </button>
-                <button onClick={cod} className="cod-btn pay-online">
-                  {codLoading ? "Processing..." : "COD & Place order"} 
+                <div className="cod">
+                  <button onClick={cod} className="cod-btn pay-online">
+                  {codLoading ? "Processing..." : "Cash On Delivery"} 
                 </button>
+                (This option will place your order).
+                </div>
+                
               </div>
             </div>
           </form>
