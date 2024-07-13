@@ -78,7 +78,7 @@ function FoodDisplay({ category }) {
                   userLocation.longitude,
                   26.7693514,
                   88.3774669
-                ) <= 10 &&
+                ) <= 20 &&
                 (category === "All" || category === item.category)
               ) {
                 return (
