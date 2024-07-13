@@ -15,6 +15,33 @@
     row-gap: 50px;
 }
 
+.location{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 70px 0;
+}
+.location h6{
+    font-size: 50px;
+    opacity: 0.3;
+}
+.location .error{
+    font-size: 20px;
+}
+.location-error{
+    font-size: 20px;
+    width: 50%;
+    text-align: center;
+}
+.location .sol{
+    width: 50%;
+    text-align: center;
+   
+}
+
 @media (max-width:500px) {
     .food-display-list {
         
@@ -22,5 +49,15 @@
         
         gap: 10px;
         row-gap: 10px;
+    }
+    .location .sol{
+        width: 100%;
+        text-align: left;
+       
+    }
+    .location-error{
+        font-size: 18px;
+        width: 100%;
+        text-align: center;
     }
 }
