@@ -10,7 +10,7 @@
 
 .my-orders-order{
     display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 1fr 2fr 1fr;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 2fr 1fr 1fr;
     align-items: center;
     gap: 30px;
     padding: 10px 20px;
@@ -22,9 +22,11 @@
 
 }
 .my-orders-order p span{
-    color: tomato;
+    color: red;
 }
-
+.text-black{
+    color: black !important;
+}
 .my-orders-order p b{
     font-weight: 500;
     color: tomato;

@@ -33,41 +33,56 @@ function MyOrders() {
     <>
       {localStorage.getItem("Token") ? (
         <>
-          {data.length === 0 ? <>
-            <div className="my-order-signout">
-            <img src={assets.my_order} alt="" />
-            <p>Your Order history is empty.</p>
-          </div>
-          </> : <><div className="my-orders">
-            <h2>My Orders</h2>
-            <div className="container">
-              {data.reverse().map((order, index) => {
-                return (
-                  <div key={index} className="my-orders-order">
-                    <img src={assets.parcel_icon} alt="parcel" />
+          {data.length === 0 ? (
+            <>
+              <div className="my-order-signout">
+                <img src={assets.my_order} alt="" />
+                <p>Your Order history is empty.</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="my-orders">
+                <h2>My Orders</h2>
+                <div className="container">
+                  {data.reverse().map((order, index) => {
+                    return (
+                      <div key={index} className="my-orders-order">
+                        <img src={assets.parcel_icon} alt="parcel" />
 
-                    <p>
-                      {order.items.map((item, index) => {
-                        if (index === order.items.length - 1) {
-                          return item.name + " x" + item.quantity;
-                        } else {
-                          return item.name + " x" + item.quantity + ", ";
-                        }
-                      })}
-                    </p>
-                    <p>₹{order.amount}.00</p>
-                    <p>Items: {order.items.length}</p>
-                    <p>
-                      <span>&#x25cf;</span>
-                      <b>{order.status}</b>
-                    </p>
-                    <button onClick={fetchData}>Track Order</button>
-                  </div>
-                );
-              })}
-            </div>
-          </div></>}
-          
+                        <p>
+                          {order.items.map((item, index) => {
+                            if (index === order.items.length - 1) {
+                              return item.name + " x" + item.quantity;
+                            } else {
+                              return item.name + " x" + item.quantity + ", ";
+                            }
+                          })}
+                        </p>
+                        <p>₹{order.amount}.00</p>
+                        <p>Items: {order.items.length}</p>
+                        <p>
+                          <span>&#x25cf;</span> &nbsp;
+                          <b>{order.status}</b>
+                        </p>
+
+                        {!order.payment && order.cod ? (
+                          <p>
+                            <b>Cash on Delivery</b>
+                          </p>
+                        ) : (
+                          <p>
+                            <b className="text-black">Paid</b>
+                          </p>
+                        )}
+                        <button onClick={fetchData}>Track Order</button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          )}
         </>
       ) : (
         <>

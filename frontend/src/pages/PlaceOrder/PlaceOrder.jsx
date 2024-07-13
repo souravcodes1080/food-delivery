@@ -13,6 +13,7 @@ function PlaceOrder() {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
+  const [codLoading, setCodLoading] = useState(false);
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -46,8 +47,8 @@ function PlaceOrder() {
       address: data,
       items: orderItems,
       amount: promoApplied
-        ? getTotalCartAmount() + 30 + 5 - 25
-        : getTotalCartAmount() + 30 + 5,
+        ? getTotalCartAmount() + 25 + 5 - 25
+        : getTotalCartAmount() + 25 + 5,
         promoApplied
     };
     setLoading(true);
@@ -69,6 +70,46 @@ function PlaceOrder() {
     }
   };
 
+  const cod = async (e) => {
+    e.preventDefault();
+    if(data.firstName === "" || data.lastName === "" || data.email === "" || data.street === "" || data.city === "" || data.state === "" || data.zipcode === "" || data.country === "" || data.phone === "" ){
+      toast.error("Please fill the required fields")
+      return
+    } 
+    let orderItems = [];
+    food_list.map((item) => {
+      if (cartItems[item._id] > 0) {
+        let itemInfo = item;
+        itemInfo["quantity"] = cartItems[item._id];
+        orderItems.push(itemInfo);
+      }
+    });
+    let orderData = {
+      address: data,
+      items: orderItems,
+      amount: promoApplied
+        ? getTotalCartAmount() + 25 + 5 - 25
+        : getTotalCartAmount() + 25 + 5,
+        promoApplied
+    };
+    setCodLoading(true);
+    let response = await axios.post(
+      `${DOMAIN}/api/order/cod`,
+      orderData,
+      {
+        headers: {
+          token,
+        },
+      }
+    );
+    if (response.data.success) {
+      const { session_url } = response.data;
+      setCodLoading(false);
+      window.location.replace(session_url);
+    } else {
+      toast.error(response.data.message);
+    }
+  };
   useEffect(() => {
     if (!localStorage.getItem("Token")) {
       toast.warn("Please login to continue.");
@@ -208,8 +249,11 @@ function PlaceOrder() {
                     </>
                   )}
                 </div>
-                <button type="submit">
-                  {loading ? "Processing..." : "Proceed to Payment"}
+                <button type="submit" className="pay-online">
+                  {loading ? "Processing..." : "Proceed to Payment"} <img src={assets.card} /> <img src={assets.upi} />
+                </button>
+                <button onClick={cod} className="cod-btn pay-online">
+                  {codLoading ? "Processing..." : "COD & Place order"} 
                 </button>
               </div>
             </div>

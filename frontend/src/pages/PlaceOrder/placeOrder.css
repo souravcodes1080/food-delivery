@@ -39,9 +39,25 @@
 .place-order .cart-total button {
     margin-top: 30px;
 }
-.upi-btn{
+.pay-online{
+    display: flex;
+    align-items: center;
+    width: 100% !important;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 20px;
+    height: 50px;
+}
+
+.pay-online img{
+    width: 30px;
+    
+}
+.cod-btn{
     margin: 0 !important;
-    background-color: transparent !important;
+    color: black !important;
+    background-color: rgb(204, 204, 204) !important;
+
 }
 .upi-btn img{
 

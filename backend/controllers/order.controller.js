@@ -12,9 +12,8 @@ const placeOrder = async (req, res) => {
       items: req.body.items,
       amount: req.body.amount,
       address: req.body.address,
+      cod: false
     });
-    await newOrder.save();
-    await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
 
     const line_items = req.body.items.map((item) => ({
       price_data: {
@@ -59,8 +58,11 @@ const placeOrder = async (req, res) => {
       },
       { apiKey: process.env.STRIPE_SECRET_KEY }
     );
+    await newOrder.save();
+    await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
 
-    console.log(session.success_url);
+    // const paymentStatus = await session.retrieve.payment_status
+
     return res.json({
       success: true,
       session_url: session.url,
@@ -74,6 +76,34 @@ const placeOrder = async (req, res) => {
     });
   }
 };
+const cod = async (req, res) => {
+  try {
+    const newOrder = new orderModel({
+      userId: req.body.userId,
+      items: req.body.items,
+      amount: req.body.amount,
+      address: req.body.address,
+      cod: true
+    });
+    
+    await newOrder.save();
+    await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
+    
+    const success_url=`${CLIENT_DOMAIN}/verify?success=ok&orderId=${newOrder._id}`
+    return res.json({
+      success: true,
+      session_url: success_url,
+      message: `Your order has been placed. Pay ₹${req.body.amount} via cash or online.`,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      success: false,
+      message: "Error placing order. Please try again later.",
+    });
+  }
+};
+
 
 const verifyOrder = async (req, res) => {
   const { orderId, success } = req.body;
@@ -82,7 +112,12 @@ const verifyOrder = async (req, res) => {
     if (success == "true") {
       await orderModel.findByIdAndUpdate(orderId, { payment: true });
       res.json({ success: true, message: "Order Placed." });
-    } else {
+    }
+    else if(success == "ok"){
+      await orderModel.findByIdAndUpdate(orderId, { payment: false });
+      res.json({ success: true, message: "Order Placed via COD." });
+    }
+    else {
       await orderModel.findByIdAndDelete(orderId);
       res.json({ success: false, message: "Payment failed." });
     }
@@ -95,7 +130,9 @@ const verifyOrder = async (req, res) => {
 //order list after confirmation
 const userOrder = async (req, res) => {
   try {
-    const orders = await orderModel.find({ userId: req.body.userId });
+    const orders = await orderModel.find({
+      $and: [{ userId: req.body.userId },{ $or: [{ payment: true }, {cod:true}]}],
+    });
     res.json({ success: true, data: orders });
   } catch (error) {
     console.log(error);
@@ -106,7 +143,7 @@ const userOrder = async (req, res) => {
 //admin panel order list
 const listOrders = async (req, res) => {
   try {
-    const orders = await orderModel.find({});
+    const orders = await orderModel.find({ $or: [{ payment: true }, {cod:true}]} );
     res.json({ success: true, data: orders });
   } catch (error) {
     console.log(error);
@@ -129,4 +166,4 @@ const updateStatus = async (req, res) => {
     });
   }
 };
-export { placeOrder, verifyOrder, userOrder, listOrders, updateStatus };
+export { placeOrder,cod, verifyOrder, userOrder, listOrders, updateStatus };
