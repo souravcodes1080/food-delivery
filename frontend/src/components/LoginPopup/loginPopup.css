@@ -27,7 +27,16 @@
     align-items: center;
     color: black;
 }
-
+.email{
+    position: relative;
+    margin-bottom: 10px;
+}
+.email span{
+    text-align: right;
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+}
 .login-title img {
     width: 16px;
     cursor: pointer;

@@ -85,6 +85,7 @@ function LoginPopup({ setShowLogin }) {
             ) : (
               <></>
             )}
+            <div className={currState == "Sign Up" ? "email" : ""}>
 
             <input
               name="email"
@@ -94,6 +95,9 @@ function LoginPopup({ setShowLogin }) {
               placeholder="Your email"
               required
             />
+            {currState == "Sign Up" ? <span>Use valid emai to receive order details*</span>: <></>}
+            
+            </div>
             <div className="password">
               <input
                 name="password"
