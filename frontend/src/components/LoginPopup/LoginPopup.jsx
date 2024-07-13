@@ -39,7 +39,8 @@ function LoginPopup({ setShowLogin }) {
         setCurrState("Login");
         setLoading(false);
       } else {
-        // toast.error(response.data.message);
+        toast.error(response.data.message);
+        setLoading(false);
       }
     } else if (currState === "Login") {
       setLoading(true);
@@ -55,7 +56,8 @@ function LoginPopup({ setShowLogin }) {
         setShowLogin(false);
         setLoading(false);
       } else {
-        // toast.error(response.data.message);
+        setLoading(false);
+        toast.error(response.data.message);
       }
     }
   };

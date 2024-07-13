@@ -11,7 +11,7 @@ function PlaceOrder() {
     useContext(StoreContext);
 
   const navigate = useNavigate();
-
+const Token = localStorage.getItem("Token");
   const [loading, setLoading] = useState(false);
   const [codLoading, setCodLoading] = useState(false);
   const [data, setData] = useState({
@@ -32,6 +32,24 @@ function PlaceOrder() {
     setData((data) => ({ ...data, [name]: value }));
   };
 
+  const fetchUserData = async () => {
+    const email = localStorage.getItem("Email");
+    // setLoading(true);
+    const response = await axios.post(
+      `${DOMAIN}/api/user/getUserByEmail`,
+      { email },
+      { headers: { Token } }
+    );
+    if (response.data.success) {
+      setData({
+        ...data,
+        name: response.data.data.name || "",
+        phone: response.data.data.phoneNumber || "",
+      });
+    } else {
+      toast.error(response.data.message);
+    }
+  };
   const placeOrder = async (e) => {
     e.preventDefault();
     let orderItems = [];
@@ -48,7 +66,7 @@ function PlaceOrder() {
       amount: promoApplied
         ? getTotalCartAmount() + 25 + 5 - 25
         : getTotalCartAmount() + 25 + 5,
-        promoApplied
+      promoApplied,
     };
     setLoading(true);
     let response = await axios.post(
@@ -71,10 +89,19 @@ function PlaceOrder() {
 
   const cod = async (e) => {
     e.preventDefault();
-    if(data.name === "" || data.email === "" || data.street === "" || data.city === "" || data.state === "" || data.zipcode === "" || data.country === "" || data.phone === "" ){
-      toast.error("Please fill the required fields")
-      return
-    } 
+    if (
+      data.name === "" ||
+      data.email === "" ||
+      data.street === "" ||
+      data.city === "" ||
+      data.state === "" ||
+      data.zipcode === "" ||
+      data.country === "" ||
+      data.phone === ""
+    ) {
+      toast.error("Please fill the required fields");
+      return;
+    }
     let orderItems = [];
     food_list.map((item) => {
       if (cartItems[item._id] > 0) {
@@ -89,18 +116,14 @@ function PlaceOrder() {
       amount: promoApplied
         ? getTotalCartAmount() + 25 + 5 - 25
         : getTotalCartAmount() + 25 + 5,
-        promoApplied
+      promoApplied,
     };
     setCodLoading(true);
-    let response = await axios.post(
-      `${DOMAIN}/api/order/cod`,
-      orderData,
-      {
-        headers: {
-          token,
-        },
-      }
-    );
+    let response = await axios.post(`${DOMAIN}/api/order/cod`, orderData, {
+      headers: {
+        token,
+      },
+    });
     if (response.data.success) {
       const { session_url } = response.data;
       setCodLoading(false);
@@ -114,6 +137,7 @@ function PlaceOrder() {
       toast.warn("Please login to continue.");
       navigate("/cart");
     }
+    fetchUserData()
   }, [token, navigate]);
   return (
     <>
@@ -249,15 +273,15 @@ function PlaceOrder() {
                   )}
                 </div>
                 <button type="submit" className="pay-online">
-                  {loading ? "Processing..." : "Pay online"} <img src={assets.card} /> <img src={assets.upi} />
+                  {loading ? "Processing..." : "Pay online"}{" "}
+                  <img src={assets.card} /> <img src={assets.upi} />
                 </button>
                 <div className="cod">
                   <button onClick={cod} className="cod-btn pay-online">
-                  {codLoading ? "Processing..." : "Cash On Delivery"} 
-                </button>
-                (This option will place your order).
+                    {codLoading ? "Processing..." : "Cash On Delivery"}
+                  </button>
+                  (This option will place your order).
                 </div>
-                
               </div>
             </div>
           </form>

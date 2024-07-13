@@ -6,7 +6,7 @@ const authMidddleware = async (req, res, next) => {
   if (!token) {
     return res.json({
       success: false,
-      message: "Authentication error. Please login again.",
+      message: "Token Expired. Please Login again.",
     });
   }
 
