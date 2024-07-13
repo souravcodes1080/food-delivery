@@ -16,7 +16,7 @@ function Navbar({ setShowLogin }) {
   return (
     <>
       <div className="navbar">
-        <Link to={"/"}>
+        <Link to={"/"} className="logo-a">
           <img
             onClick={() => setMenu("home")}
             src={assets.logo}

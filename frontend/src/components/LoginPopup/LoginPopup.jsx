@@ -9,7 +9,7 @@ function LoginPopup({ setShowLogin }) {
   const { setToken, setEmail } = useContext(StoreContext);
   const [currState, setCurrState] = useState("Sign Up");
   const [showPassword, setShowPassword] = useState(true);
-const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -37,12 +37,12 @@ const [loading, setLoading] = useState(false)
         setToken(response.data.token);
         localStorage.setItem("Token", response.data.token);
         setCurrState("Login");
-        setLoading(false)
+        setLoading(false);
       } else {
         // toast.error(response.data.message);
       }
     } else if (currState === "Login") {
-      setLoading(true)
+      setLoading(true);
       const response = await axios.post(`${DOMAIN}/api/user/login`, {
         email: userData.email,
         password: userData.password,
@@ -53,7 +53,7 @@ const [loading, setLoading] = useState(false)
         localStorage.setItem("Email", response.data.email);
         localStorage.setItem("Token", response.data.token);
         setShowLogin(false);
-        setLoading(false)
+        setLoading(false);
       } else {
         // toast.error(response.data.message);
       }
@@ -117,10 +117,15 @@ const [loading, setLoading] = useState(false)
               ? `${!loading ? " Create account" : "Processing..."}`
               : `${!loading ? " Login" : "Log in..."}`}
           </button>
-          <div className="login-condition">
-            <input type="checkbox" required />
-            <p>By continuing, I agree to terms of use & privacy policy.</p>
-          </div>
+          {currState === "Sign Up" ? (
+            <div className="login-condition">
+              <input type="checkbox" required />
+              <p>By continuing, I agree to terms of use & privacy policy.</p>
+            </div>
+          ) : (
+            <></>
+          )}
+
           {currState === "Sign Up" ? (
             <p>
               Already have an account?

@@ -11,6 +11,10 @@
     animation-fill-mode: forwards; 
 }
 
+.logo-a{
+    display: flex;
+}
+
 @keyframes slideIn {
     0% {
         visibility: visible;

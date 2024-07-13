@@ -4,9 +4,16 @@
     margin: 30px auto;
     background: url("../../assets/header_img.png") ;
     border-radius: 20px;
-    background-size: contain;
+    background-size: cover;
     position: relative;
+    overflow: hidden;
     background-repeat: no-repeat;
+}
+.header-backdrop{
+    backdrop-filter:brightness(0.7);
+    width: 100%;
+    height: 100%;
+
 }
 
 .header-content {
@@ -16,7 +23,7 @@
     align-items: start;
     gap: 1.5vw;
     max-width: 50%;
-    bottom: 10%;
+    bottom: 15%;
     left: 6vw;
     animation: fade-in 2s;
 }

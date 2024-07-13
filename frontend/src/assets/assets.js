@@ -1,5 +1,6 @@
 import basket_icon from './basket_icon.png'
 import logo from './logo.png'
+import logo2 from './logo2.png'
 import header_img from './header_img.png'
 import search_icon from './search_icon.png'
 import menu_1 from './menu_1.png'
@@ -65,6 +66,7 @@ import card from './card.png'
 import my_order from './my_order.png'
 export const assets = {
     logo,
+    logo2,
     basket_icon,
     header_img,
     search_icon,

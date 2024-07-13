@@ -16,6 +16,10 @@
     grid-template-columns: 2fr 1fr 1fr;
     gap: 80px;
 }
+.footer-content-left img{
+    /* mix-blend-mode: multiply; */
+    /* filter: invert(1); */
+}
 .footer-content-left, .footer-content-center, .footer-content-right{
     display: flex;
     flex-direction: column;

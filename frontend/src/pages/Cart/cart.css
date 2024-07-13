@@ -16,6 +16,7 @@
     width: 70px;
     height: 40px;
     object-fit: cover;
+    border-radius: 7px;
 }
 .cart hr{
     height: 1px;
@@ -118,5 +119,10 @@
     }
     .empty-cart p{
         width: 100%;
+    }
+    .cart-items-item img{
+        width: 50px;
+        height: 40px;
+        object-fit: cover;
     }
 }

@@ -7,7 +7,7 @@ function Footer() {
       <div className="footer" id="contact-us">
         <div className="footer-content">
           <div className="footer-content-left">
-            <img src={assets.logo} alt="logo" />
+            <img src={assets.logo2} alt="logo" width={"290px"}/>
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Perspiciatis earum eum libero iure voluptatem. Placeat omnis
@@ -32,13 +32,13 @@ function Footer() {
             <h2>GET IN TOUCH</h2>
             <ul>
                 <li>+91 67690 98264</li>
-                <li>tomato.contact@gmail.com</li>
+                <li>contact@thh.com</li>
             </ul>
           </div>
         </div>
         <hr />
         <p className="footer-copyright">
-            Copyright 2024 @ Tomato.com - All Right Reserved.
+            Copyright 2024 @ thh.com - All Right Reserved.
         </p>
       </div>
     </>
