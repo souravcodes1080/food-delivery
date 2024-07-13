@@ -15,8 +15,7 @@ function PlaceOrder() {
   const [loading, setLoading] = useState(false);
   const [codLoading, setCodLoading] = useState(false);
   const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
     street: "",
     city: "",
@@ -72,7 +71,7 @@ function PlaceOrder() {
 
   const cod = async (e) => {
     e.preventDefault();
-    if(data.firstName === "" || data.lastName === "" || data.email === "" || data.street === "" || data.city === "" || data.state === "" || data.zipcode === "" || data.country === "" || data.phone === "" ){
+    if(data.name === "" || data.email === "" || data.street === "" || data.city === "" || data.state === "" || data.zipcode === "" || data.country === "" || data.phone === "" ){
       toast.error("Please fill the required fields")
       return
     } 
@@ -126,20 +125,20 @@ function PlaceOrder() {
               <div className="multi-fields">
                 <input
                   required
-                  name="firstName"
+                  name="name"
                   onChange={onChangeHandler}
-                  value={data.firstName}
+                  value={data.name}
                   type="text"
-                  placeholder="First Name"
+                  placeholder="Full Name"
                 />
-                <input
+                {/* <input
                   required
                   name="lastName"
                   onChange={onChangeHandler}
                   value={data.lastName}
                   type="text"
                   placeholder="Last Name"
-                />
+                /> */}
               </div>
               <input
                 required

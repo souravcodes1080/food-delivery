@@ -13,6 +13,7 @@ function MyProfile() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
+  const token = localStorage.getItem("Token");
   const logout = () => {
     localStorage.removeItem("Token");
     localStorage.removeItem("Email");
@@ -25,7 +26,6 @@ function MyProfile() {
     fetchUserData();
   }, []);
   const fetchUserData = async () => {
-    const token = localStorage.getItem("Token");
     const email = localStorage.getItem("Email");
     setLoading(true);
     const response = await axios.post(
@@ -44,13 +44,26 @@ function MyProfile() {
       toast.error(response.data.message);
     }
   };
+  const updateUser = async (e) => {
+    e.preventDefault();
+
+    const response = await axios.post(
+      `${DOMAIN}/api/user/updateUserByEmail`,
+      { name, email, phone },
+      { headers: { token } }
+    );
+    if (response.data.success) {
+      console.log("user updated");
+      toast.success(response.data.message);
+    } else toast.error(response.data.message);
+  };
   return (
     <>
       <div className="my-profile-wrapper">
         {/* <h2>My Profile</h2> */}
         <div className="profile-inputs">
           <img src={assets.profile_icon} alt="" width={"40px"} />
-          <form>
+          <form onSubmit={updateUser}>
             <input
               type="text"
               placeholder="Name"

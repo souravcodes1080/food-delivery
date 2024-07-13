@@ -50,7 +50,7 @@ function Orders() {
                   })}
                 </p>
                 <p className="order-item-name">
-                  {order.address.firstName + " " + order.address.lastName}
+                  {order.address.name}
                 </p>
                 <div className="order-item-address">
                   <p>{order.address.street + ", "}</p>

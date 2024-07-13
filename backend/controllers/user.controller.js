@@ -95,4 +95,16 @@ const getUserByEmail = async (req, res) => {
     return res.json({ success: false, message: "Error. Try again later." });
   }
 };
-export { loginUser, registerUser, getUserByEmail };
+const updateUserByEmail = async (req, res) => {
+  try {
+    const { name, email, phone } = req.body;
+    const user = await userModel.findOne({email})
+    if (user) {
+      const updatedUser = await userModel.findOneAndUpdate({ email }, {name, phoneNumber:phone}, {new:true});
+      return res.json({ success: true, data: updatedUser, message: "User updated sucessfully." });
+    }
+  } catch (error) {
+    return res.json({ success: false, message: "Error. Try again later." });
+  }
+};
+export { loginUser, registerUser, getUserByEmail, updateUserByEmail };
