@@ -93,7 +93,10 @@
 .navbar-profile{
     position: relative;
 }
-.nav-profile-dropdown{
+.navbar-profile img{
+    cursor: pointer;
+}
+/* .nav-profile-dropdown{
     position: absolute;
     display: none;
     right: 0px;
@@ -115,13 +118,13 @@
     align-items: center;
     gap: 10px;
     cursor: pointer;
-}
+} */
 .nav-profile-dropdown img{
     width: 20px;
 }
-.nav-profile-dropdown li:hover{
+/* .nav-profile-dropdown li:hover{
     color: tomato;
-}
+} */
 @media(max-width: 1050px){
     .navbar .logo{
         width: 140px;

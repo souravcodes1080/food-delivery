@@ -68,14 +68,14 @@ function Navbar({ setShowLogin }) {
           </div>
           {localStorage.getItem('Token') ? (
             <div className="navbar-profile">
-              <img src={assets.profile_icon} alt="profile" />
-              <ul className='nav-profile-dropdown'>
+              <img src={assets.profile_icon} alt="profile" onClick={()=> {navigate("/myprofile")}} />
+              {/* <ul className='nav-profile-dropdown'>
                 <Link to={'/myorders'}><li ><img src={assets.bag_icon} alt="bag" /> 
                   <p>Orders</p>
                 </li></Link>
                 <hr />
                 <li onClick={logout}><img src={assets.logout_icon} alt="logout" /><p>Logout</p></li>
-              </ul>
+              </ul> */}
             </div>
           ) : (
             <button onClick={() => setShowLogin(true)}>Sign In</button>

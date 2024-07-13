@@ -1,0 +1,61 @@
+.my-profile-wrapper{
+    width: fit-content;
+    margin: auto;
+    margin-top: 30px;
+}
+.my-profile-wrapper h2{
+    margin-bottom: 20px;
+}
+.profile-inputs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.profile-inputs img{
+    border-radius: 100px;
+margin-bottom: 10px;
+}
+.profile-inputs form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.profile-inputs input{
+    width: 300px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #c9c9c9;
+    border-radius: 4px;
+    font-size: 15px;
+}
+.profile-inputs input:nth-child(4){
+    width: 300px;
+    height: 70px;
+}
+.my-profile-wrapper .button-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.button-wrapper button{
+    border: none;
+    padding: 10px 15px;
+    background-color: tomato;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.button-wrapper button:nth-child(1){
+    border: none;
+    padding: 10px 15px;
+    background-color: rgb(129, 71, 255);
+    
+}
+.button-wrapper button:nth-child(3){
+    border: none;
+    padding: 10px 15px;
+    background-color: rgb(214, 0, 0);
+  
+}

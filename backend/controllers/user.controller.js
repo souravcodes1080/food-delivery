@@ -22,13 +22,13 @@ const loginUser = async (req, res) => {
 
     const token = createToken(user._id);
     return res.json({
-        success: true,
-        token,
-        email: user.email,
-        message: "User logged in.",
-      });
+      success: true,
+      token,
+      email: user.email,
+      message: "User logged in.",
+    });
   } catch (error) {
-    return res.json({success: false, message: "Error. Try again later."})
+    return res.json({ success: false, message: "Error. Try again later." });
   }
 };
 const registerUser = async (req, res) => {
@@ -69,7 +69,7 @@ const registerUser = async (req, res) => {
     const token = createToken(user._id);
 
     //send welcome mail
-    sendWelcomeMail(email,name)
+    sendWelcomeMail(email, name);
     if (user) {
       return res.json({
         success: true,
@@ -84,4 +84,15 @@ const registerUser = async (req, res) => {
   }
 };
 
-export { loginUser, registerUser };
+const getUserByEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await userModel.findOne({ email });
+    if (user) {
+      return res.json({ success: true, data: user, message: "User found" });
+    }
+  } catch (error) {
+    return res.json({ success: false, message: "Error. Try again later." });
+  }
+};
+export { loginUser, registerUser, getUserByEmail };
