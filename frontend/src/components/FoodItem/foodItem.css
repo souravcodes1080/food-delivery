@@ -122,7 +122,7 @@
     min-height: 50px;
     /* max-height: 50px; */
     /* overflow: hidden; */
-    background-color: blue;
+    /* background-color: blue; */
 }
 .food-item-name-rating:nth-child(1){
     align-items: baseline !important;
