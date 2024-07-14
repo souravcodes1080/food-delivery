@@ -11,6 +11,7 @@ import menu_5 from './menu_5.png'
 import menu_6 from './menu_6.png'
 import menu_7 from './menu_7.png'
 import menu_8 from './menu_8.png'
+// import food_9 from './food_9.png'
 
 import food_1 from './food_1.png'
 import food_2 from './food_2.png'
@@ -94,11 +95,11 @@ export const assets = {
 export const menu_list = [
     {
         menu_name: "Starter",
-        menu_image: menu_1
+        menu_image: menu_7
     },
     {
         menu_name: "Momos",
-        menu_image: menu_2
+        menu_image: food_9
     },
     {
         menu_name: "Soup",
@@ -106,23 +107,23 @@ export const menu_list = [
     },
     {
         menu_name: "Rice & Noodles",
-        menu_image: menu_4
+        menu_image: menu_8
     },
     {
         menu_name: "Special Combo",
-        menu_image: menu_5
-    },
-    {
-        menu_name: "Deserts",
         menu_image: menu_6
     },
     {
+        menu_name: "Deserts",
+        menu_image: menu_4
+    },
+    {
         menu_name: "Special Drinks",
-        menu_image: menu_7
+        menu_image: menu_2
     },
     {
         menu_name: "Hot Drinks",
-        menu_image: menu_8
+        menu_image: menu_1
     }]
 
 export const food_list = [

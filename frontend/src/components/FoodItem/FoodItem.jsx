@@ -38,14 +38,13 @@ function FoodItem({ id, name, price, description, image, category }) {
             <p>{name}</p>
           </div>
           <p className="food-item-desc">{description}</p>
-          <div className="food-item-name-rating">
 
-          <p className="food-item-price">₹{price}</p>
-          <div className="bubble">{category}</div>
-          </div>
-
-          <div className="food-item-rating">
+          {/* <div className="food-item-rating">
             <img src={assets.rating_starts} alt="" />
+          </div> */}
+          <div className=" food-price-rating-wrapper">
+            <p className="food-item-price">₹{price}</p>
+            <p className="bubble">{category}</p>
           </div>
         </div>
       </div>

@@ -46,6 +46,7 @@
     color: #747474;
     font-size: max(1.1vw, 16px);
     cursor: pointer;
+    min-height: 50px;
 }
 
 .explore-menu hr {

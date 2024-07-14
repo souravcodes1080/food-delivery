@@ -7,8 +7,10 @@ function FoodDisplay({ category }) {
   const { food_list, loading } = useContext(StoreContext);
   const [userLocation, setUserLocation] = useState(null);
   const [locationError, setLocationError] = useState(false);
+  const [locationLoading, setLocationLoading] = useState(true);
 
   useEffect(() => {
+    setLocationLoading(true);
     // Function to fetch user's current location using Geolocation API
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -17,16 +19,19 @@ function FoodDisplay({ category }) {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
           });
+          setLocationLoading(false);
         },
         (error) => {
           console.error("Error getting user location:", error);
           setLocationError(true);
+          setLocationLoading(false);
           // Handle errors, e.g., show message to user or fallback
         }
       );
     } else {
       console.error("Geolocation is not supported by this browser.");
       setLocationError(true);
+      setLocationLoading(false);
       // Handle cases where geolocation is not supported
     }
   }, []);
@@ -35,7 +40,7 @@ function FoodDisplay({ category }) {
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
     const R = 6371; // Radius of the earth in km
     const dLat = deg2rad(lat2 - lat1);
-    const dLon = deg2rad(lon2 - lon1);
+    const dLon = deg2rad(lon1 - lon2);
     const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(deg2rad(lat1)) *
@@ -54,9 +59,10 @@ function FoodDisplay({ category }) {
   return (
     <>
       <h2>Top dishes near you</h2>
-      {loading ? (
+      {loading || locationLoading ? (
         <div className="loader-wrapper">
           <div className="loader"></div>
+          
         </div>
       ) : locationError ? (
         <div className="location">
@@ -68,9 +74,9 @@ function FoodDisplay({ category }) {
         </div>
       ) : (
         <div className="food-display" id="food-display">
-          <div className="food-display-list" >
-            {food_list.map((item, index) => {
-              // Check if userLocation is available and if the distance is within 10 km
+          <div className="food-display-list">
+            {food_list.map((item) => {
+              // Check if userLocation is available and if the distance is within 20 km
               if (
                 userLocation &&
                 calculateDistance(
@@ -83,7 +89,7 @@ function FoodDisplay({ category }) {
               ) {
                 return (
                   <FoodItem
-                  key={item._id}
+                    key={item._id}
                     id={item._id}
                     name={item.name}
                     description={item.description}
@@ -111,12 +117,11 @@ function FoodDisplay({ category }) {
             <div className="location" key="location-error">
               <h6>:( </h6>
               <p className="error">
-                We are not available at your location. We serve only within 10km
-                radius.
+                We are not available at your location. We serve only within a 10 km radius.
               </p>
               <p className="sol">
                 If you are a developer, go ahead and change your browser's lat &
-                long to 26.7693514 & 88.3774669. (For testing purpose only).
+                long to 26.7693514 & 88.3774669. (For testing purposes only).
               </p>
             </div>
           )}
