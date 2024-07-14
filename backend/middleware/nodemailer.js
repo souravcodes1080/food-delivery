@@ -337,6 +337,7 @@ const sendOrderConfirmNotif = async (
                         <th>Amount:</th>
                         <td>${amount}</td>
                     </tr>
+                    <tr>
                     ${
                       cod
                         ? `
@@ -350,6 +351,7 @@ const sendOrderConfirmNotif = async (
                           `
                     } 
                     </tr>
+                    <tr>
                     ${
                       cod
                         ? `
@@ -361,7 +363,7 @@ const sendOrderConfirmNotif = async (
                         : `<th>Payment Status:</th>
                           <td>Paid</td>`
                     } 
-                   
+                   </tr>
                 </table>
             </div>
             <div class="order-description">

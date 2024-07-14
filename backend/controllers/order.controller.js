@@ -117,7 +117,7 @@ const verifyOrder = async (req, res) => {
       const orderDetails = await orderModel.findById(orderId);
       sendOrderConfirmNotif(
         orderDetails.address.email,
-        orderDetails.address.firstName,
+        orderDetails.address.name,
         orderDetails.address.street,
         orderDetails.address.phone,
         orderDetails.amount,
@@ -129,7 +129,7 @@ const verifyOrder = async (req, res) => {
       const orderDetails = await orderModel.findById(orderId);
       sendOrderConfirmNotif(
         orderDetails.address.email,
-        orderDetails.address.firstName,
+        orderDetails.address.name,
         orderDetails.address.street,
         orderDetails.address.phone,
         orderDetails.amount,
@@ -185,7 +185,7 @@ const updateStatus = async (req, res) => {
     const orderDetails = await orderModel.findById(req.body.orderId);
     sendOrderStatusNotif(
       orderDetails.address.email,
-      orderDetails.address.firstName,
+      orderDetails.address.name,
       orderDetails.address.street,
       orderDetails.address.phone,
       orderDetails.amount,
