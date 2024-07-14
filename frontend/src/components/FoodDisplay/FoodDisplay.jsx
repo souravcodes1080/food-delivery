@@ -8,6 +8,8 @@ function FoodDisplay({ category }) {
   const [userLocation, setUserLocation] = useState(null);
   const [locationError, setLocationError] = useState(false);
   const [locationLoading, setLocationLoading] = useState(true);
+  const [sortOrder, setSortOrder] = useState("asc"); // Default sorting order
+  const [vegOnly, setVegOnly] = useState(false); // State for Veg/Non-Veg switch
 
   useEffect(() => {
     setLocationLoading(true);
@@ -56,13 +58,60 @@ function FoodDisplay({ category }) {
     return deg * (Math.PI / 180);
   };
 
+  // Function to handle sorting
+  const handleSort = (event) => {
+    setSortOrder(event.target.value);
+  };
+
+  // Function to handle Veg/Non-Veg switch
+  const handleVegSwitch = () => {
+    setVegOnly((prevVegOnly) => !prevVegOnly);
+  };
+
+  // Sort and filter the food list based on the selected order and Veg/Non-Veg filter
+  const sortedFoodList = [...food_list]
+    .filter((item) => (vegOnly ? item.veg : true))
+    .sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a.price - b.price;
+      } else if (sortOrder === "desc") {
+        return b.price - a.price;
+      }
+      return 0;
+    });
+
   return (
     <>
-      <h2>Top dishes near you</h2>
+      <br />
+      <div className="title">
+        <h2>Top dishes</h2>
+        {loading || locationLoading ? (
+          <></>
+        ) : (
+          <div className="controls">
+            <div className="sort-container">
+              <select id="sort" value={sortOrder} onChange={handleSort}>
+                <option value="asc">Low to High</option>
+                <option value="desc">High to Low</option>
+              </select>
+            </div>
+            <div className="veg-switch">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={vegOnly}
+                  onChange={handleVegSwitch}
+                />
+                Veg Only
+              </label>
+            </div>
+          </div>
+        )}
+      </div>
+
       {loading || locationLoading ? (
         <div className="loader-wrapper">
           <div className="loader"></div>
-          
         </div>
       ) : locationError ? (
         <div className="location">
@@ -75,7 +124,7 @@ function FoodDisplay({ category }) {
       ) : (
         <div className="food-display" id="food-display">
           <div className="food-display-list">
-            {food_list.map((item) => {
+            {sortedFoodList.map((item) => {
               // Check if userLocation is available and if the distance is within 20 km
               if (
                 userLocation &&
@@ -96,6 +145,8 @@ function FoodDisplay({ category }) {
                     price={item.price}
                     image={item.image}
                     category={item.category}
+                    available={item.available}
+                    veg={item.veg}
                   />
                 );
               } else {
@@ -117,7 +168,8 @@ function FoodDisplay({ category }) {
             <div className="location" key="location-error">
               <h6>:( </h6>
               <p className="error">
-                We are not available at your location. We serve only within a 10 km radius.
+                We are not available at your location. We serve only within a 10
+                km radius.
               </p>
               <p className="sol">
                 If you are a developer, go ahead and change your browser's lat &

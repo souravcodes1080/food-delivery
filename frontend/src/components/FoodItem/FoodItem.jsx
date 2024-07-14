@@ -3,12 +3,30 @@ import "./foodItem.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
 import { DOMAIN } from "../../config";
-function FoodItem({ id, name, price, description, image, category }) {
+function FoodItem({
+  id,
+  name,
+  price,
+  description,
+  image,
+  category,
+  available,
+}) {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
   return (
     <>
-      <div className="food-item">
+      <div className={available ? "food-item" : "unavailable food-item"}>
         <div className="food-item-img-container">
+          {available ? (
+            <></>
+          ) : (
+            <div className="item-unavailable-wrapper">
+              <p className="item-unavailabe">
+                Sorry the item is currently unavailable
+              </p>
+            </div>
+          )}
+
           <img className="food-item-image" src={image} alt={name} />
           {!cartItems[id] ? (
             <img
