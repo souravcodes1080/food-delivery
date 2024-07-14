@@ -16,7 +16,19 @@ function App() {
 
   return (
     <>
-      <ToastContainer />
+     <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="light"
+        transition:Slide
+      />
       <div className="top-navbar">
         <p>
           Our bots are working hard to add new food items. 
