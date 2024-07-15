@@ -53,15 +53,14 @@ function Orders() {
                   {order.address.name}
                 </p>
                 <div className="order-item-address">
-                  <p>{order.address.street + ", "}</p>
-                  <p>
-                    {order.address.city +
+                  <p>{order.address.apartmentNo + ", "+
+                    order.address.street +
                       ", " +
-                      order.address.state +
+                      order.address.area +
                       ", " +
-                      order.address.country +
+                      order.address.city +
                       " - " +
-                      order.address.zipcode}
+                      order.address.landmark}
                   </p>
                 </div>
                 <p className="order-item-phone">{order.address.phone}</p>

@@ -11,17 +11,18 @@ function PlaceOrder() {
     useContext(StoreContext);
 
   const navigate = useNavigate();
-const Token = localStorage.getItem("Token");
+  const Token = localStorage.getItem("Token");
+  const [dataLoading, setDataLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [codLoading, setCodLoading] = useState(false);
   const [data, setData] = useState({
     name: "",
     email: "",
-    street: "",
+    apartmentNo: "",
     city: "",
-    state: "",
-    zipcode: "",
-    country: "",
+    area: "",
+    street: "",
+    landmark: "",
     phone: "",
   });
 
@@ -34,7 +35,7 @@ const Token = localStorage.getItem("Token");
 
   const fetchUserData = async () => {
     const email = localStorage.getItem("Email");
-    // setLoading(true);
+    setDataLoading(true);
     const response = await axios.post(
       `${DOMAIN}/api/user/getUserByEmail`,
       { email },
@@ -45,9 +46,16 @@ const Token = localStorage.getItem("Token");
         ...data,
         name: response.data.data.name || "",
         phone: response.data.data.phoneNumber || "",
+        apartmentNo: response.data.data.apartmentNo || "",
+        area: response.data.data.area || "",
+        landmark: response.data.data.landmark || "",
+        street: response.data.data.street || "",
+        city: response.data.data.city || "",
       });
+      setDataLoading(false);
     } else {
       toast.error(response.data.message);
+      setDataLoading(false);
     }
   };
   const placeOrder = async (e) => {
@@ -92,11 +100,11 @@ const Token = localStorage.getItem("Token");
     if (
       data.name === "" ||
       data.email === "" ||
-      data.street === "" ||
+      data.apartmentNo === "" ||
       data.city === "" ||
-      data.state === "" ||
-      data.zipcode === "" ||
-      data.country === "" ||
+      data.area === "" ||
+      data.street === "" ||
+      data.landmark === "" ||
       data.phone === ""
     ) {
       toast.error("Please fill the required fields");
@@ -137,7 +145,7 @@ const Token = localStorage.getItem("Token");
       toast.warn("Please login to continue.");
       navigate("/cart");
     }
-    fetchUserData()
+    fetchUserData();
   }, [token, navigate]);
   return (
     <>
@@ -146,16 +154,25 @@ const Token = localStorage.getItem("Token");
           <form className="place-order" onSubmit={placeOrder}>
             <div className="place-order-left">
               <p className="title">Delivery Information</p>
-              <div className="multi-fields">
-                <input
-                  required
-                  name="name"
-                  onChange={onChangeHandler}
-                  value={data.name}
-                  type="text"
-                  placeholder="Full Name"
-                />
-                {/* <input
+              {dataLoading ? (
+                <>
+                  {" "}
+                  <div className="loader-wrapper">
+                    <div className="loader"></div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="multi-fields">
+                    <input
+                      required
+                      name="name"
+                      onChange={onChangeHandler}
+                      value={data.name}
+                      type="text"
+                      placeholder="Full Name"
+                    />
+                    {/* <input
                   required
                   name="lastName"
                   onChange={onChangeHandler}
@@ -163,67 +180,73 @@ const Token = localStorage.getItem("Token");
                   type="text"
                   placeholder="Last Name"
                 /> */}
-              </div>
-              <input
-                required
-                name="email"
-                onChange={onChangeHandler}
-                value={localStorage.getItem("Email")}
-                type="email"
-                placeholder="Email Address"
-              />
-              <input
-                required
-                name="street"
-                onChange={onChangeHandler}
-                value={data.street}
-                type="text"
-                placeholder="Street"
-              />
-              <div className="multi-fields">
-                <input
-                  required
-                  name="city"
-                  onChange={onChangeHandler}
-                  value={data.city}
-                  type="text"
-                  placeholder="City"
-                />
-                <input
-                  required
-                  name="state"
-                  onChange={onChangeHandler}
-                  value={data.state}
-                  type="text"
-                  placeholder="State"
-                />
-              </div>
-              <div className="multi-fields">
-                <input
-                  required
-                  name="zipcode"
-                  onChange={onChangeHandler}
-                  value={data.zipcode}
-                  type="zipcode"
-                  placeholder="Zip Code"
-                />
-                <input
-                  required
-                  name="country"
-                  onChange={onChangeHandler}
-                  value={data.country}
-                  type="text"
-                  placeholder="Country"
-                />
-              </div>
-              <input
-                required
-                name="phone"
-                onChange={onChangeHandler}
-                value={data.phone}
-                type="number"
-                placeholder="Phone Number"
-              />
+                  </div>
+                  <input
+                    required
+                    name="email"
+                    onChange={onChangeHandler}
+                    value={localStorage.getItem("Email")}
+                    type="email"
+                    placeholder="Email Address"
+                  />
+                  <input
+                    required
+                    name="apartmentNo"
+                    onChange={onChangeHandler}
+                    value={data.apartmentNo}
+                    type="text"
+                    placeholder="Apartment no/name"
+                  />
+                  <div className="multi-fields">
+                    <input
+                      required
+                      name="street"
+                      onChange={onChangeHandler}
+                      value={data.street}
+                      type="text"
+                      placeholder="Street"
+                    />
+                    
+                    <input
+                      required
+                      name="area"
+                      onChange={onChangeHandler}
+                      
+                      value={data.area}
+                      type="text"
+                      placeholder="Locality"
+                    />
+                  </div>
+                  <div className="multi-fields">
+                    <input
+                      required
+                      name="city"
+                      onChange={onChangeHandler}
+                      // readOnly
+                      value={data.city}
+                      type="text"
+                      placeholder="City"
+                    />
+                    <input
+                      
+                      name="landmark"
+                      onChange={onChangeHandler}
+                      value={data.landmark}
+                      type="text"
+                      placeholder="Landmark"
+                    />
+                  </div>
+
+                  <input
+                    required
+                    name="phone"
+                    onChange={onChangeHandler}
+                    value={data.phone}
+                    type="number"
+                    placeholder="Phone Number"
+                  />
+                </>
+              )}
             </div>
             <div className="place-order-right">
               <div className="cart-total">
@@ -280,7 +303,10 @@ const Token = localStorage.getItem("Token");
                   <button onClick={cod} className="cod-btn pay-online">
                     {codLoading ? "Processing..." : "Cash On Delivery"}
                   </button>
+                  <p>
+
                   (This option will place your order).
+                  </p>
                 </div>
               </div>
             </div>

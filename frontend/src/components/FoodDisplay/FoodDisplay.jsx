@@ -163,7 +163,7 @@ function FoodDisplay({ category }) {
                 userLocation.longitude,
                 26.7693514,
                 88.3774669
-              ) <= 10
+              ) <= 14
           ) && (
             <div className="location" key="location-error">
               <h6>:( </h6>

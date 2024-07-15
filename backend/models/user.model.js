@@ -11,8 +11,23 @@ const userSchema = new mongoose.Schema(
       unique: true,
       required: true,
     },
-    phoneNumber:{
-      type: Number
+    phoneNumber: {
+      type: Number,
+    },
+    apartmentNo: {
+      type: String,
+    },
+    street: {
+      type: String,
+    },
+    area: {
+      type: String,
+    },
+    landmark: {
+      type: String,
+    },
+    city: {
+      type: String,
     },
     password: {
       type: String,

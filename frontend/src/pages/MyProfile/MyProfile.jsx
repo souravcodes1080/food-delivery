@@ -11,7 +11,14 @@ function MyProfile() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
+  // const [address, setAddress] = useState("");
+
+  const [apartmentNo, setApartmentNo] = useState("");
+  const [area, setArea] = useState("");
+  const [street, setStreet] = useState("");
+  const [city, setCity] = useState("");
+  const [landmark, setLandmark] = useState("");
+
   const [loading, setLoading] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
   const token = localStorage.getItem("Token");
@@ -38,7 +45,11 @@ function MyProfile() {
       setName(response.data.data.name || "");
       setEmail(response.data.data.email || "");
       setPhone(response.data.data.phoneNumber || "");
-      setAddress(response.data.data.address || "");
+      setApartmentNo(response.data.data.apartmentNo || "");
+      setArea(response.data.data.area || "");
+      setStreet(response.data.data.street || "");
+      setLandmark(response.data.data.landmark || "");
+      setCity(response.data.data.city || "");
       setLoading(false);
     } else {
       setLoading(false);
@@ -50,7 +61,7 @@ function MyProfile() {
     setUpdateLoading(true);
     const response = await axios.post(
       `${DOMAIN}/api/user/updateUserByEmail`,
-      { name, email, phone },
+      { name, email, phone, apartmentNo, street, area, landmark, city },
       { headers: { token } }
     );
     if (response.data.success) {
@@ -74,6 +85,7 @@ function MyProfile() {
           <div className="profile-inputs">
             <img src={assets.profile_icon} alt="" width={"40px"} />
             <form onSubmit={updateUser}>
+              <p>Account details</p>
               <input
                 type="text"
                 placeholder="Name"
@@ -91,16 +103,56 @@ function MyProfile() {
                 }}
               />
               <input type="email" disabled placeholder="Email" value={email} />
+              <p>Address</p>
+              <div className="multi-fields-profile">
+                <input
+                  onChange={(e) => {
+                    setApartmentNo(e.target.value);
+                  }}
+                  value={apartmentNo}
+                  type="text"
+                  placeholder="Apartment No"
+                />
+
+                <input
+                  onChange={(e) => {
+                    setStreet(e.target.value);
+                  }}
+                  value={street}
+                  type="text"
+                  placeholder="Street"
+                />
+              </div>
               <input
-                type="text"
-                placeholder="Address"
-                value={address}
                 onChange={(e) => {
-                  setAddress(e.target.value);
+                  setArea(e.target.value);
                 }}
+                value={area}
+                type="text"
+                placeholder="Locality"
               />
+              <div className="multi-fields-profile multi-fields-profile-2">
+                <input
+                  onChange={(e) => {
+                    setLandmark(e.target.value);
+                  }}
+                  value={landmark}
+                  type="text"
+                  placeholder="Landmark"
+                />
+                <input
+                  onChange={(e) => {
+                    setCity(e.target.value);
+                  }}
+                  value={city}
+                  type="text"
+                  placeholder="City"
+                />
+              </div>
               <div className="button-wrapper">
-                <button type="submit">{updateLoading ? "Updating..." : "Update"}</button>
+                <button type="submit">
+                  {updateLoading ? "Updating..." : "Update"}
+                </button>
                 <button type="button" onClick={() => navigate("/myorders")}>
                   My orders
                 </button>

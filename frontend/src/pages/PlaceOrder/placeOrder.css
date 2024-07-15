@@ -59,6 +59,10 @@
     background-color: rgb(204, 204, 204) !important;
 
 }
+.cod p{
+    text-align: right;
+}
+
 .upi-btn img{
 
     width: 70px;

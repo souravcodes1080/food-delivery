@@ -97,10 +97,10 @@ const getUserByEmail = async (req, res) => {
 };
 const updateUserByEmail = async (req, res) => {
   try {
-    const { name, email, phone } = req.body;
+    const { name, email, phone, apartmentNo, area, landmark, city, street } = req.body;
     const user = await userModel.findOne({email})
     if (user) {
-      const updatedUser = await userModel.findOneAndUpdate({ email }, {name, phoneNumber:phone}, {new:true});
+      const updatedUser = await userModel.findOneAndUpdate({ email }, {name, phoneNumber:phone, apartmentNo, street, area, landmark, city}, {new:true});
       return res.json({ success: true, data: updatedUser, message: "User updated sucessfully." });
     }
   } catch (error) {

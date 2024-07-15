@@ -20,24 +20,33 @@ margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 400px;
+    /* background-color: yellow; */
 }
 .profile-inputs input{
-    width: 300px;
+    /* width: 300px; */
     padding: 10px;
     outline: none;
     border: 1px solid #c9c9c9;
     border-radius: 4px;
     font-size: 15px;
 }
-.profile-inputs input:nth-child(4){
-    width: 300px;
-    height: 70px;
-}
+
 .my-profile-wrapper .button-wrapper{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+.multi-fields-profile{
+    /* width: 100%; */
+    display: flex;
+    gap: 10px;
+}
+.multi-fields-profile input:nth-child(1){width: 30%;}
+.multi-fields-profile input:nth-child(2){width: 70%;}
+
+.multi-fields-profile-2 input:nth-child(2){width: 40%;}
+.multi-fields-profile-2 input:nth-child(1){width: 60%;}
 .button-wrapper button{
     border: none;
     padding: 10px 15px;
@@ -58,4 +67,14 @@ margin-bottom: 10px;
     padding: 10px 15px;
     background-color: rgb(214, 0, 0);
   
+}
+
+@media (max-width:500px) {
+    .profile-inputs form{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 350px;
+        /* background-color: yellow; */
+    }
 }
