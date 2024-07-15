@@ -62,6 +62,7 @@ const updateFoodStatus = async (req, res) => {
         .json({ success: false, message: "Food not found." });
     }
 
+    food.name = req.body.name;
     food.price = req.body.price;
     food.available = req.body.available;
 

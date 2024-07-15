@@ -47,6 +47,7 @@ function Update() {
     e.preventDefault()
     const response = await axios.patch(`${DOMAIN}/api/food/update/available/${id}`,{
       price : data.price,
+      name: data.name,
       available: data.available
     })
     if( response.data.success){
@@ -77,7 +78,7 @@ function Update() {
           </div>
           <div className="add-product-name flex-col">
             <p>Product Name *</p>
-            <input type="text" value={data.name} readOnly disabled />
+            <input type="text" value={data.name} onChange={onChangeHandler}   />
           </div>
           <div className="add-product-desc flex-col">
             <p>Product Description *</p>
