@@ -29,7 +29,7 @@ function User() {
             <b>Name</b>
             <b>Email</b>
             <b>Phone Number</b>
-            <b>Action</b>
+            {/* <b>Action</b> */}
           </div>
           {list.map((item, index) => {
             return (
@@ -41,11 +41,11 @@ function User() {
 
                 <p>{item.email}</p>
                 <p>{item.phoneNumber}</p>
-                <Link to={`/update/${item._id}`}>
+                {/* <Link to={`/update/${item._id}`}>
                   <p className={"cursor-pointer"}>
                     <img src={assets.edit_icon} className="edit-icon" />
                   </p>
-                </Link>
+                </Link> */}
               </div>
             );
           })}
