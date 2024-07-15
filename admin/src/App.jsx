@@ -9,6 +9,7 @@ import Update from "./pages/Update/Update";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login/Login";
+import User from "./pages/User/User";
 
 function App() {
   const [isAuthorized, setIsAuthorized] = useState(false);
@@ -49,6 +50,7 @@ function App() {
             <div className="inner-body">
               <Routes>
                 <Route path="/" exact element={<Login />} />
+                <Route path="/users" element={<User />} />
                 <Route path="/add" element={<Add />} />
                 <Route path="/list" element={<List />} />
                 <Route path="/orders" element={<Orders />} />

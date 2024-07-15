@@ -11,6 +11,10 @@ function Sidebar() {
                     <img src={assets.add_icon} alt="add" />
                     <p>Dashboard</p>
                 </NavLink>
+                <NavLink to={"/users"} className="sidebar-option">
+                    <img src={assets.add_icon} alt="add" />
+                    <p>Users</p>
+                </NavLink>
                 <NavLink to={"/add"} className="sidebar-option">
                     <img src={assets.add_icon} alt="add" />
                     <p>Add Food</p>

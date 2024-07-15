@@ -39,11 +39,23 @@
 .edit-icon{
     width: 25px;
 }
+.list-table-format-user{
+
+    display: grid !important;
+    grid-template-columns: 0.5fr 1fr 0.5fr 0.5fr;
+}
 @media (max-width:600px) {
     .list-table-format{
         grid-template-columns:  1fr 3fr 1fr 0.4fr ;
         gap: 15px;
         border: none;
+    }
+    .list-table-format-user{
+
+        display: grid !important;
+        width: 600px;
+        grid-template-columns: 1fr 2fr 1fr 0.5fr;
+        
     }
     .list-table-format.title{
         display: none;

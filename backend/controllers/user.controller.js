@@ -84,6 +84,18 @@ const registerUser = async (req, res) => {
   }
 };
 
+const getAllUser = async (req, res) => {
+  try {
+  
+    const user = await userModel.find({});
+    if (user) {
+      return res.json({ success: true, data: user, message: "User fetched" });
+    }
+  } catch (error) {
+    return res.json({ success: false, message: "Error. Try again later." });
+  }
+};
+
 const getUserByEmail = async (req, res) => {
   try {
     const { email } = req.body;
@@ -107,4 +119,4 @@ const updateUserByEmail = async (req, res) => {
     return res.json({ success: false, message: "Error. Try again later." });
   }
 };
-export { loginUser, registerUser, getUserByEmail, updateUserByEmail };
+export { loginUser, registerUser, getAllUser, getUserByEmail, updateUserByEmail };
